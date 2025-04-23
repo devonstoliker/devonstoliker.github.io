@@ -6,6 +6,7 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: #ffffff;
   color: #333;
+  line-height: 1.6;
 }
 
 #container {
@@ -14,53 +15,63 @@ body {
   position: relative;
 }
 
-/* Sidebar wrapper for positioning canvas and content */
+/* Sidebar wrapper that includes canvas */
 #sidebar-wrapper {
   position: relative;
   width: 280px;
-  z-index: 0;
+  flex-shrink: 0;
 }
 
-/* Canvas for animated background */
+/* Background animation canvas */
 #sidebar-canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 280px;
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  background: transparent;
 }
 
-/* Sidebar content above canvas */
+/* Sidebar styling (copied from Moein) */
 #sidebar {
   position: relative;
-  padding: 2rem 1.5rem;
   z-index: 1;
-  background-color: #ffffff;
+  background-color: #fff;
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
-/* === Profile Image - vertical rectangular frame === */
+.site-title {
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
 .profile-img {
-  width: 100%;
-  max-width: 120px;
+  width: 120px;
   height: 180px;
   object-fit: cover;
-  border-radius: 8px; /* soften corners */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   display: block;
   margin: 1rem auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* Sidebar link styling */
+.affiliation {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+}
+
 #sidebar-nav-links a {
   display: block;
-  margin: 0.5rem 0;
-  color: #007acc;
+  margin: 0.4rem 0;
+  color: #005fa3;
   text-decoration: none;
   font-weight: 500;
 }
@@ -71,25 +82,24 @@ body {
 
 #sidebar-icon-links {
   margin-top: 2rem;
+  text-align: center;
 }
 
 #sidebar-icon-links a {
-  margin-right: 1rem;
+  margin: 0 0.4rem;
   font-size: 1.2rem;
   text-decoration: none;
 }
 
 /* === Main Content Area === */
 #main-content {
-  flex: 1;
+  flex-grow: 1;
   padding: 2rem;
 }
 
 #main-content h2 {
-  font-size: 1.5rem;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
 }
 
 #main-content p {
