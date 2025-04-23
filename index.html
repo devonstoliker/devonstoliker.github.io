@@ -18,31 +18,33 @@
     <!-- Sidebar starts -->
     <div id="sidebar">
       <!-- Canvas sits behind all sidebar content -->
-      <canvas id="sidebar-canvas"></canvas>
+      <canvas id="sidebar-canvas" aria-hidden="true"></canvas>
 
-      <header>
-        <h3 class="site-title">Devon Stoliker</h3>
-        <p class="lead">
-          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
-        </p>
-        <div class="affiliation">Neuroscience Researcher</div>
-      </header>
+      <div style="position: relative; z-index: 1;">
+        <header>
+          <h3 class="site-title">Devon Stoliker</h3>
+          <p class="lead">
+            <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
+          </p>
+          <div class="affiliation">Neuroscience Researcher</div>
+        </header>
 
-      <!-- Navigation links -->
-      <nav id="sidebar-nav-links">
-        <a href="index.html">Profile</a>
-        <a href="education.html">Education</a>
-        <a href="career_history.html">Career History</a>
-        <a href="publications.html">Publications</a>
-        <a href="awards.html">Awards</a>
-        <a href="talks.html">Talks</a>
-      </nav>
+        <!-- Navigation links -->
+        <nav id="sidebar-nav-links">
+          <a href="index.html">Profile</a>
+          <a href="education.html">Education</a>
+          <a href="career_history.html">Career History</a>
+          <a href="publications.html">Publications</a>
+          <a href="awards.html">Awards</a>
+          <a href="talks.html">Talks</a>
+        </nav>
 
-      <!-- Contact icons -->
-      <nav id="sidebar-icon-links">
-        <a href="mailto:your.email@example.com" class="icon" title="Email">📧</a>
-        <a href="https://linkedin.com/in/yourprofile" class="icon" title="LinkedIn">🔗</a>
-      </nav>
+        <!-- Contact icons -->
+        <nav id="sidebar-icon-links">
+          <a href="mailto:your.email@example.com" class="icon" title="Email">📧</a>
+          <a href="https://linkedin.com/in/yourprofile" class="icon" title="LinkedIn">🔗</a>
+        </nav>
+      </div>
     </div>
     <!-- Sidebar ends -->
 
