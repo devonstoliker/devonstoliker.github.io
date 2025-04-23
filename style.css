@@ -13,19 +13,20 @@ body {
 #container {
   display: flex;
   min-height: 100vh;
-  position: relative; /* Needed for SVG positioning */
+  position: relative; /* Needed for child positioning */
 }
 
-/* === SVG Background Styling === */
-/* Positions the SVG behind the sidebar */
-#sidebar-bg {
+/* === Sidebar Background Canvas === */
+/* This canvas is drawn behind the sidebar content */
+#sidebar-canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 280px; /* Match sidebar width */
+  width: 100%;
   height: 100%;
-  z-index: 0; /* Push behind sidebar */
+  z-index: 0;
   pointer-events: none;
+  opacity: 0.6; /* subtle visibility */
 }
 
 /* === Sidebar === */
@@ -33,10 +34,12 @@ body {
   width: 280px;
   padding: 2rem 1.5rem;
   position: relative;
-  z-index: 1; /* Above SVG background */
+  z-index: 1; /* Layer above canvas */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #ffffff;
+  overflow: hidden;
 }
 
 .site-title {
@@ -110,10 +113,6 @@ body {
   #sidebar {
     width: 100%;
     box-shadow: none;
-  }
-
-  #sidebar-bg {
-    width: 100%;
   }
 
   #main-content {
