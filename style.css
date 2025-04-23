@@ -8,68 +8,67 @@ body {
   color: #333;
 }
 
-/* Main container holding sidebar + content */
 #container {
   display: flex;
   min-height: 100vh;
   position: relative;
 }
 
-/* === Sidebar Block and Canvas Layer === */
-
-/* Sidebar wrapper enables canvas + content stacking */
+/* Sidebar wrapper for canvas and sidebar */
 #sidebar-wrapper {
   position: relative;
   width: 280px;
-  z-index: 0; /* base layer */
 }
 
-/* The canvas background animation */
+/* Background animation canvas */
 #sidebar-canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 280px;
   height: 100%;
   z-index: 0;
-  pointer-events: none; /* prevent canvas from blocking clicks */
+  pointer-events: none;
 }
 
-/* Sidebar content goes above the canvas */
+/* Sidebar content over canvas */
 #sidebar {
   position: relative;
+  z-index: 1;
   padding: 2rem 1.5rem;
-  z-index: 1; /* ensures content is visible above canvas */
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* === Sidebar Styling === */
+/* Profile image in vertical rectangle */
+.profile-img {
+  width: 100%;
+  max-width: 120px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin: 1rem auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
 .site-title {
   margin-top: 0;
   font-weight: 700;
   font-size: 1.4rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .affiliation {
   font-size: 0.95rem;
   color: #666;
   margin-top: 0.5rem;
+  text-align: center;
 }
 
-.profile-img {
-  width: 100%;
-  max-width: 150px;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  display: block;
-  margin: 1rem auto;
-}
-
-/* Nav link layout */
 #sidebar-nav-links a {
   display: block;
   margin: 0.5rem 0;
@@ -82,9 +81,9 @@ body {
   text-decoration: underline;
 }
 
-/* Contact icons */
 #sidebar-icon-links {
   margin-top: 2rem;
+  text-align: center;
 }
 
 #sidebar-icon-links a {
