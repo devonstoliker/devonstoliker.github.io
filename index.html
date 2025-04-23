@@ -8,61 +8,54 @@
   <!-- Load Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
 
-  <!-- Load your CSS file -->
+  <!-- Load CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Layout container holds sidebar and main content -->
+  <!-- Layout container with sidebar and main content -->
   <div id="container">
+    
+    <!-- Background canvas for glow effect, behind the sidebar -->
+    <canvas id="sidebar-bg-canvas" aria-hidden="true"></canvas>
 
-    <!-- Sidebar starts -->
+    <!-- Sidebar -->
     <div id="sidebar">
-      <!-- Canvas sits behind all sidebar content -->
-      <canvas id="sidebar-canvas"></canvas>
+      <header>
+        <h3 class="site-title">Devon Stoliker</h3>
+        <p class="lead">
+          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
+        </p>
+        <div class="affiliation">Neuroscience Researcher</div>
+      </header>
 
-      <div style="position: relative; z-index: 1;">
-        <header>
-          <h3 class="site-title">Devon Stoliker</h3>
-          <p class="lead">
-            <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
-          </p>
-          <div class="affiliation">Neuroscience Researcher</div>
-        </header>
+      <!-- Navigation -->
+      <nav id="sidebar-nav-links">
+        <a href="index.html">Profile</a>
+        <a href="education.html">Education</a>
+        <a href="career_history.html">Career History</a>
+        <a href="publications.html">Publications</a>
+        <a href="awards.html">Awards</a>
+        <a href="talks.html">Talks</a>
+      </nav>
 
-        <!-- Navigation links -->
-        <nav id="sidebar-nav-links">
-          <a href="index.html">Profile</a>
-          <a href="education.html">Education</a>
-          <a href="career_history.html">Career History</a>
-          <a href="publications.html">Publications</a>
-          <a href="awards.html">Awards</a>
-          <a href="talks.html">Talks</a>
-        </nav>
-
-        <!-- Contact icons -->
-        <nav id="sidebar-icon-links">
-          <a href="mailto:your.email@example.com" class="icon" title="Email">📧</a>
-          <a href="https://linkedin.com/in/yourprofile" class="icon" title="LinkedIn">🔗</a>
-        </nav>
-      </div>
+      <!-- Contact Icons -->
+      <nav id="sidebar-icon-links">
+        <a href="mailto:your.email@example.com" class="icon" title="Email">📧</a>
+        <a href="https://linkedin.com/in/yourprofile" class="icon" title="LinkedIn">🔗</a>
+      </nav>
     </div>
-    <!-- Sidebar ends -->
 
-    <!-- Main content area -->
+    <!-- Main Content -->
     <div id="main-content">
       <section id="profile-summary">
         <h2>About Me</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lacinia urna in nulla dignissim, nec volutpat lorem tincidunt.
-        </p>
-        <p>
-          Vivamus auctor ex ac lacus fermentum, at hendrerit nulla tempor. Donec convallis felis nec mauris vulputate, vel luctus odio convallis.
-        </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lacinia urna in nulla dignissim, nec volutpat lorem tincidunt.</p>
+        <p>Vivamus auctor ex ac lacus fermentum, at hendrerit nulla tempor. Donec convallis felis nec mauris vulputate, vel luctus odio convallis.</p>
       </section>
     </div>
   </div>
 
-  <!-- Load animated background script -->
+  <!-- Background animation -->
   <script src="background.js"></script>
 </body>
 </html>
