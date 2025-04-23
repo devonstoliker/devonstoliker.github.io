@@ -4,56 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Devon Stoliker</title>
-  <!-- Google font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
-  <!-- External CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Page layout container -->
   <div id="container">
-    
-    <!-- Sidebar wrapper allows absolute positioning for canvas inside -->
-    <div id="sidebar-wrapper">
-      <!-- Canvas for animated background, placed first to render behind all content -->
+    <!-- Backdrop canvas inside sidebar -->
+    <div id="sidebar">
       <canvas id="sidebar-canvas" aria-hidden="true"></canvas>
 
-      <!-- Sidebar content block -->
-      <div id="sidebar">
-        <header>
-          <h3 class="site-title">Devon Stoliker</h3>
-          <p class="lead">
-            <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
-          </p>
-          <div class="affiliation">Neuroscience Researcher</div>
-        </header>
+      <header>
+        <h3 class="site-title">Devon Stoliker</h3>
+        <p class="lead">
+          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
+        </p>
+        <div class="affiliation">Neuroscience Researcher</div>
+      </header>
 
-        <nav id="sidebar-nav-links">
-          <a href="#">Profile</a>
-          <a href="#">Education</a>
-          <a href="#">Career History</a>
-          <a href="#">Publications</a>
-          <a href="#">Awards</a>
-          <a href="#">Talks</a>
-        </nav>
+      <nav id="sidebar-nav-links">
+        <a href="#">Profile</a>
+        <a href="#">Education</a>
+        <a href="#">Career History</a>
+        <a href="#">Publications</a>
+        <a href="#">Awards</a>
+        <a href="#">Talks</a>
+      </nav>
 
-        <nav id="sidebar-icon-links">
-          <a href="mailto:email@example.com" class="icon">📧</a>
-          <a href="https://linkedin.com/in/example" class="icon">🔗</a>
-        </nav>
-      </div>
+      <nav id="sidebar-icon-links">
+        <a href="mailto:email@example.com" class="icon">📧</a>
+        <a href="https://linkedin.com/in/example" class="icon">🔗</a>
+      </nav>
     </div>
 
-    <!-- Main page content -->
     <div id="main-content">
       <section id="profile-summary">
         <h2>About Me</h2>
-        <p>This is the restored version with fixed layout and canvas positioning. The animation now stays behind the sidebar column.</p>
+        <p>This is the version that was working earlier today, with RustamAbraham’s animation in the sidebar.</p>
       </section>
     </div>
   </div>
 
-  <!-- JS for animated background -->
   <script src="background.js"></script>
 </body>
 </html>

@@ -1,6 +1,3 @@
-/* style.css */
-
-/* === Global Layout === */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -8,23 +5,21 @@ body {
   color: #333;
 }
 
-/* Main container holding sidebar + content */
 #container {
   display: flex;
   min-height: 100vh;
   position: relative;
 }
 
-/* === Sidebar Block and Canvas Layer === */
-
-/* Sidebar wrapper enables canvas + content stacking */
-#sidebar-wrapper {
-  position: relative;
+#sidebar {
   width: 280px;
-  z-index: 0; /* base layer */
+  padding: 2rem 1.5rem;
+  position: relative;
+  background-color: #ffffff;
+  overflow: visible;
+  z-index: 1;
 }
 
-/* The canvas background animation */
 #sidebar-canvas {
   position: absolute;
   top: 0;
@@ -32,81 +27,18 @@ body {
   width: 100%;
   height: 100%;
   z-index: 0;
-  pointer-events: none; /* prevent canvas from blocking clicks */
-}
-
-/* Sidebar content goes above the canvas */
-#sidebar {
-  position: relative;
-  padding: 2rem 1.5rem;
-  z-index: 1; /* ensures content is visible above canvas */
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* === Sidebar Styling === */
-.site-title {
-  margin-top: 0;
-  font-weight: 700;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-}
-
-.affiliation {
-  font-size: 0.95rem;
-  color: #666;
-  margin-top: 0.5rem;
+  pointer-events: none;
 }
 
 .profile-img {
   width: 100%;
   max-width: 150px;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   display: block;
   margin: 1rem auto;
 }
 
-/* Nav link layout */
-#sidebar-nav-links a {
-  display: block;
-  margin: 0.5rem 0;
-  color: #007acc;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-#sidebar-nav-links a:hover {
-  text-decoration: underline;
-}
-
-/* Contact icons */
-#sidebar-icon-links {
-  margin-top: 2rem;
-}
-
-#sidebar-icon-links a {
-  margin-right: 1rem;
-  font-size: 1.2rem;
-  text-decoration: none;
-}
-
-/* === Main Content Area === */
 #main-content {
   flex: 1;
   padding: 2rem;
-}
-
-#main-content h2 {
-  font-size: 1.5rem;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-#main-content p {
-  max-width: 800px;
-  margin-bottom: 1rem;
 }

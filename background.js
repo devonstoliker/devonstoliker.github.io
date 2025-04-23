@@ -1,78 +1,80 @@
-/* background.js */
-/* Light particle network animation inside the sidebar */
-/* This script draws softly moving particles that connect when close, to evoke a neural/AI network. */
+window.backgroundAnimationStarted = false;
 
-const canvas = document.getElementById('sidebar-canvas');
-const ctx = canvas.getContext('2d');
+document.addEventListener('DOMContentLoaded', () => {
+  window.backgroundAnimationStarted = true;
 
-let particles = [];
-const particleCount = 40;
-const maxDistance = 100;
+  const canvas = document.getElementById('sidebar-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
 
-function resizeCanvas() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-}
+  let width = canvas.width = canvas.offsetWidth;
+  let height = canvas.height = canvas.offsetHeight;
 
-function createParticles() {
-  particles = [];
-  for (let i = 0; i < particleCount; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5
-    });
+  let particles = [];
+
+  function Particle() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vx = Math.random() * 1 - 0.5;
+    this.vy = Math.random() * 1 - 0.5;
+    this.radius = 2;
   }
-}
 
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  particles.forEach(p => {
+  Particle.prototype.draw = function() {
     ctx.beginPath();
-    ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI);
-    ctx.fillStyle = '#d1d5db'; // light grey tone
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(255,0,0,0.6)";
+    ctx.shadowColor = "rgba(255,0,0,1)";
+    ctx.shadowBlur = 12;
     ctx.fill();
-  });
+  };
 
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < maxDistance) {
-        ctx.beginPath();
-        ctx.strokeStyle = 'rgba(209,213,219,0.3)';
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.stroke();
-      }
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < 70; i++) {
+      particles.push(new Particle());
     }
   }
-}
 
-function update() {
-  particles.forEach(p => {
-    p.x += p.vx;
-    p.y += p.vy;
+  function animateParticles() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.globalCompositeOperation = "lighter";
 
-    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    for (let i = 0; i < particles.length; i++) {
+      let p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      p.draw();
+
+      for (let j = i + 1; j < particles.length; j++) {
+        let p2 = particles[j];
+        let dx = p.x - p2.x;
+        let dy = p.y - p2.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = "rgba(255,0,0," + (1 - dist / 140) + ")";
+          ctx.lineWidth = 0.4;
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(animateParticles);
+  }
+
+  initParticles();
+  animateParticles();
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = canvas.offsetWidth;
+    height = canvas.height = canvas.offsetHeight;
+    initParticles();
   });
-}
-
-function animate() {
-  draw();
-  update();
-  requestAnimationFrame(animate);
-}
-
-// Initialise on load
-window.addEventListener('resize', () => {
-  resizeCanvas();
-  createParticles();
 });
-resizeCanvas();
-createParticles();
-animate();
