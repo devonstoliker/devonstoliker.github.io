@@ -1,121 +1,45 @@
-/* style.css */
-
-/* === Global Settings === */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background-color: #ffffff;
   color: #333;
-  line-height: 1.6;
 }
 
-/* === Layout Container === */
 #container {
   display: flex;
   min-height: 100vh;
-  position: relative; /* Needed for child positioning */
+  position: relative;
 }
 
-/* === Sidebar Background Canvas === */
-/* This canvas is drawn behind the sidebar content */
 #sidebar-canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 280px;
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.6; /* subtle visibility */
+  background: transparent;
 }
 
-/* === Sidebar === */
 #sidebar {
   width: 280px;
   padding: 2rem 1.5rem;
   position: relative;
-  z-index: 1; /* Layer above canvas */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  z-index: 1;
   background-color: #ffffff;
-  overflow: hidden;
-}
-
-.site-title {
-  margin-top: 0;
-  font-weight: 700;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-}
-
-.affiliation {
-  font-size: 0.95rem;
-  color: #666;
-  margin-top: 0.5rem;
+  overflow: visible;
 }
 
 .profile-img {
   width: 100%;
   max-width: 150px;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   display: block;
   margin: 1rem auto;
 }
 
-#sidebar-nav-links a {
-  display: block;
-  margin: 0.5rem 0;
-  color: #007acc;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-#sidebar-nav-links a:hover {
-  text-decoration: underline;
-}
-
-#sidebar-icon-links {
-  margin-top: 2rem;
-}
-
-#sidebar-icon-links a {
-  margin-right: 1rem;
-  font-size: 1.2rem;
-  text-decoration: none;
-}
-
-/* === Main Content Area === */
 #main-content {
   flex: 1;
   padding: 2rem;
-}
-
-#main-content h2 {
-  font-size: 1.5rem;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-#main-content p {
-  max-width: 800px;
-  margin-bottom: 1rem;
-}
-
-/* === Responsive Design === */
-@media (max-width: 768px) {
-  #container {
-    flex-direction: column;
-  }
-
-  #sidebar {
-    width: 100%;
-    box-shadow: none;
-  }
-
-  #main-content {
-    padding: 1.5rem;
-  }
 }

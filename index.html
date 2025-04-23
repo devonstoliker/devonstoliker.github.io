@@ -4,65 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Devon Stoliker</title>
-
-  <!-- Load Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
-
-  <!-- Load your CSS file -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Layout container holds sidebar and main content -->
   <div id="container">
+    <!-- Corrected canvas ID -->
+    <canvas id="sidebar-canvas" aria-hidden="true"></canvas>
 
-    <!-- Sidebar starts -->
     <div id="sidebar">
-      <!-- Canvas sits behind all sidebar content -->
-      <canvas id="sidebar-canvas"></canvas>
+      <header>
+        <h3 class="site-title">Devon Stoliker</h3>
+        <p class="lead">
+          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
+        </p>
+        <div class="affiliation">Neuroscience Researcher</div>
+      </header>
 
-      <div style="position: relative; z-index: 1;">
-        <header>
-          <h3 class="site-title">Devon Stoliker</h3>
-          <p class="lead">
-            <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
-          </p>
-          <div class="affiliation">Neuroscience Researcher</div>
-        </header>
+      <nav id="sidebar-nav-links">
+        <a href="#">Profile</a>
+        <a href="#">Education</a>
+        <a href="#">Career History</a>
+        <a href="#">Publications</a>
+        <a href="#">Awards</a>
+        <a href="#">Talks</a>
+      </nav>
 
-        <!-- Navigation links -->
-        <nav id="sidebar-nav-links">
-          <a href="index.html">Profile</a>
-          <a href="education.html">Education</a>
-          <a href="career_history.html">Career History</a>
-          <a href="publications.html">Publications</a>
-          <a href="awards.html">Awards</a>
-          <a href="talks.html">Talks</a>
-        </nav>
-
-        <!-- Contact icons -->
-        <nav id="sidebar-icon-links">
-          <a href="mailto:your.email@example.com" class="icon" title="Email">📧</a>
-          <a href="https://linkedin.com/in/yourprofile" class="icon" title="LinkedIn">🔗</a>
-        </nav>
-      </div>
+      <nav id="sidebar-icon-links">
+        <a href="mailto:email@example.com" class="icon">📧</a>
+        <a href="https://linkedin.com/in/example" class="icon">🔗</a>
+      </nav>
     </div>
-    <!-- Sidebar ends -->
 
-    <!-- Main content area -->
     <div id="main-content">
       <section id="profile-summary">
         <h2>About Me</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lacinia urna in nulla dignissim, nec volutpat lorem tincidunt.
-        </p>
-        <p>
-          Vivamus auctor ex ac lacus fermentum, at hendrerit nulla tempor. Donec convallis felis nec mauris vulputate, vel luctus odio convallis.
-        </p>
+        <p>This version restores the previously working animation from RustamAbraham's CodePen. It uses the original ID: <code>sidebar-canvas</code>.</p>
       </section>
     </div>
   </div>
 
-  <!-- Load animated background script -->
   <script src="background.js"></script>
 </body>
 </html>
