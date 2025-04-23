@@ -3,50 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Devon Stoliker</title>
+  <title>Moein-style Sidebar | Devon Stoliker</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Fixed animation canvas outside sidebar -->
   <canvas id="sidebar-canvas" aria-hidden="true"></canvas>
 
   <div id="container">
     <!-- Sidebar -->
     <div id="sidebar">
-      <!-- Overlay: sits behind content, above animation -->
       <div class="sidebar-overlay"></div>
 
-      <!-- All content wrapped for z-index control -->
       <div class="sidebar-content">
-        <header>
-          <h3 class="site-title">Devon Stoliker</h3>
-          <p class="lead">
-            <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
-          </p>
-          <div class="affiliation">Neuroscience Researcher</div>
-        </header>
+        <h1 class="site-title">Moein Khajehnejad</h1>
+        <p class="affiliation">Computational Neuroscience Laboratory</p>
+
+        <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
 
         <nav id="sidebar-nav-links">
-          <a href="#">Profile</a>
-          <a href="#">Education</a>
-          <a href="#">Career History</a>
+          <a href="#">Main</a>
           <a href="#">Publications</a>
-          <a href="#">Awards</a>
+          <a href="#">Honors</a>
           <a href="#">Talks</a>
+          <a href="#">Professional Contributions</a>
+          <a href="#">CV</a>
         </nav>
 
         <nav id="sidebar-icon-links">
-          <a href="mailto:email@example.com" class="icon">📧</a>
-          <a href="https://linkedin.com/in/example" class="icon">🔗</a>
+          <a href="mailto:your.email@example.com" title="Email">📧</a>
+          <a href="https://linkedin.com/in/yourprofile" title="LinkedIn">🔗</a>
+          <a href="https://scholar.google.com/citations?user=XXXX" title="Google Scholar">🎓</a>
+          <a href="https://github.com/devonstoliker" title="GitHub">🐱</a>
         </nav>
+
+        <footer class="sidebar-footer">
+          <p>© 2025. MIT License.</p>
+        </footer>
       </div>
     </div>
 
     <div id="main-content">
-      <section id="profile-summary">
-        <h2>About Me</h2>
-        <p>This version adds a transparent white overlay above the animation but beneath the sidebar content.</p>
+      <section>
+        <h2>Welcome</h2>
+        <p>This sidebar now mirrors Moein's layout, text content, spacing, and icon placement.</p>
       </section>
     </div>
   </div>
