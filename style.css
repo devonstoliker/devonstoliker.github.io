@@ -16,25 +16,30 @@ body {
   pointer-events: none;
 }
 
-/* Layout container */
+/* Main layout container */
 #container {
   display: flex;
   min-height: 100vh;
   position: relative;
 }
 
-/* Sidebar over canvas */
+/* Sidebar content now floats above canvas with no background */
 #sidebar {
   width: 280px;
   padding: 2rem 1.5rem;
-  background-color: #ffffff;
-  z-index: 1;
   position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
+/* Optional: apply shadow for text visibility */
+#sidebar * {
+  text-shadow: 0 0 5px rgba(255,255,255,0.7);
+}
+
+/* Profile image framed vertically */
 .profile-img {
   width: 120px;
   height: 180px;
