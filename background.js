@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   Particle.prototype.draw = function() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(255,0,0,0.6)";
+    ctx.fillStyle = "rgba(255,0,0,0.3)";
     ctx.shadowColor = "rgba(255,0,0,1)";
     ctx.shadowBlur = 12;
     ctx.fill();
