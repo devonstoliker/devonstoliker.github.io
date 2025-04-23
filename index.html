@@ -8,41 +8,40 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- OUTSIDE CANVAS: fixed to sidebar position -->
+  <canvas id="sidebar-canvas" aria-hidden="true"></canvas>
+
   <div id="container">
+    <!-- Sidebar content -->
+    <div id="sidebar">
+      <header>
+        <h3 class="site-title">Devon Stoliker</h3>
+        <p class="lead">
+          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
+        </p>
+        <div class="affiliation">Neuroscience Researcher</div>
+      </header>
 
-    <!-- Sidebar wrapper for z-index layering -->
-    <div id="sidebar-wrapper">
-      <canvas id="sidebar-canvas" aria-hidden="true"></canvas>
+      <nav id="sidebar-nav-links">
+        <a href="#">Profile</a>
+        <a href="#">Education</a>
+        <a href="#">Career History</a>
+        <a href="#">Publications</a>
+        <a href="#">Awards</a>
+        <a href="#">Talks</a>
+      </nav>
 
-      <div id="sidebar">
-        <header>
-          <h3 class="site-title">Devon Stoliker</h3>
-          <p class="lead">
-            <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
-          </p>
-          <div class="affiliation">Neuroscience Researcher</div>
-        </header>
-
-        <nav id="sidebar-nav-links">
-          <a href="#">Profile</a>
-          <a href="#">Education</a>
-          <a href="#">Career History</a>
-          <a href="#">Publications</a>
-          <a href="#">Awards</a>
-          <a href="#">Talks</a>
-        </nav>
-
-        <nav id="sidebar-icon-links">
-          <a href="mailto:email@example.com" class="icon">📧</a>
-          <a href="https://linkedin.com/in/example" class="icon">🔗</a>
-        </nav>
-      </div>
+      <nav id="sidebar-icon-links">
+        <a href="mailto:email@example.com" class="icon">📧</a>
+        <a href="https://linkedin.com/in/example" class="icon">🔗</a>
+      </nav>
     </div>
 
+    <!-- Main content -->
     <div id="main-content">
       <section id="profile-summary">
         <h2>About Me</h2>
-        <p>This layout uses a wrapper to fix canvas layering, ensuring it's always behind your content.</p>
+        <p>This canvas is now absolutely positioned outside the sidebar to prevent layering bugs.</p>
       </section>
     </div>
   </div>
