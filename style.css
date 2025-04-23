@@ -1,7 +1,6 @@
 /* style.css */
 
 /* === Global Settings === */
-/* Set font and general appearance across the page */
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -11,25 +10,35 @@ body {
 }
 
 /* === Layout Container === */
-/* Flexbox layout to place sidebar and main content side-by-side */
 #container {
   display: flex;
-  min-height: 100vh; /* Full vertical height */
+  min-height: 100vh;
+  position: relative; /* Needed for SVG positioning */
+}
+
+/* === SVG Background Styling === */
+/* Positions the SVG behind the sidebar */
+#sidebar-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px; /* Match sidebar width */
+  height: 100%;
+  z-index: 0; /* Push behind sidebar */
+  pointer-events: none;
 }
 
 /* === Sidebar === */
-/* Left panel with navigation and user identity */
 #sidebar {
   width: 280px;
-  background-color: #f8f9fa;
   padding: 2rem 1.5rem;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1; /* Above SVG background */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Style for the site title */
 .site-title {
   margin-top: 0;
   font-weight: 700;
@@ -37,14 +46,12 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Affiliation / role */
 .affiliation {
   font-size: 0.95rem;
   color: #666;
   margin-top: 0.5rem;
 }
 
-/* Profile image settings */
 .profile-img {
   width: 100%;
   max-width: 150px;
@@ -54,7 +61,6 @@ body {
   margin: 1rem auto;
 }
 
-/* === Navigation Links in Sidebar === */
 #sidebar-nav-links a {
   display: block;
   margin: 0.5rem 0;
@@ -67,7 +73,6 @@ body {
   text-decoration: underline;
 }
 
-/* Social icon links at the bottom */
 #sidebar-icon-links {
   margin-top: 2rem;
 }
@@ -79,13 +84,11 @@ body {
 }
 
 /* === Main Content Area === */
-/* Right side of the layout */
 #main-content {
   flex: 1;
   padding: 2rem;
 }
 
-/* Section title styling */
 #main-content h2 {
   font-size: 1.5rem;
   border-bottom: 1px solid #e0e0e0;
@@ -93,14 +96,12 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Paragraph styling */
 #main-content p {
   max-width: 800px;
   margin-bottom: 1rem;
 }
 
 /* === Responsive Design === */
-/* On smaller screens, stack sidebar and main content */
 @media (max-width: 768px) {
   #container {
     flex-direction: column;
@@ -109,6 +110,10 @@ body {
   #sidebar {
     width: 100%;
     box-shadow: none;
+  }
+
+  #sidebar-bg {
+    width: 100%;
   }
 
   #main-content {
