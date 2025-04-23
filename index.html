@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Devon Stoliker</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="sidebar-canvas"></canvas>
+  <div id="container">
+    <!-- Backdrop canvas inside sidebar -->
+    <div id="sidebar">
+      <canvas id="sidebar-canvas" aria-hidden="true"></canvas>
 
-  <div id="sidebar">
-    <header>
-      <h3 class="site-title">Devon Stoliker</h3>
-      <p class="lead">
-        <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
-      </p>
-      <div class="affiliation">Neuroscience Researcher</div>
-    </header>
+      <header>
+        <h3 class="site-title">Devon Stoliker</h3>
+        <p class="lead">
+          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
+        </p>
+        <div class="affiliation">Neuroscience Researcher</div>
+      </header>
 
-    <nav id="sidebar-nav-links">
-      <a href="#">Profile</a>
-      <a href="#">Education</a>
-      <a href="#">Career History</a>
-      <a href="#">Publications</a>
-      <a href="#">Awards</a>
-      <a href="#">Talks</a>
-    </nav>
+      <nav id="sidebar-nav-links">
+        <a href="#">Profile</a>
+        <a href="#">Education</a>
+        <a href="#">Career History</a>
+        <a href="#">Publications</a>
+        <a href="#">Awards</a>
+        <a href="#">Talks</a>
+      </nav>
 
-    <nav id="sidebar-icon-links">
-      <a href="mailto:email@example.com" class="icon">📧</a>
-      <a href="https://linkedin.com/in/example" class="icon">🔗</a>
-    </nav>
+      <nav id="sidebar-icon-links">
+        <a href="mailto:email@example.com" class="icon">📧</a>
+        <a href="https://linkedin.com/in/example" class="icon">🔗</a>
+      </nav>
+    </div>
+
+    <div id="main-content">
+      <section id="profile-summary">
+        <h2>About Me</h2>
+        <p>This is the version that was working earlier today, with RustamAbraham’s animation in the sidebar.</p>
+      </section>
+    </div>
   </div>
 
   <script src="background.js"></script>
