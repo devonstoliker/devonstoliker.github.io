@@ -10,6 +10,7 @@ body {
   min-height: 100vh;
 }
 
+/* Sidebar container */
 #sidebar {
   width: 280px;
   position: relative;
@@ -21,6 +22,7 @@ body {
   z-index: 1;
 }
 
+/* Animation canvas placed behind all sidebar content */
 #sidebar-canvas {
   position: absolute;
   top: 0;
@@ -31,6 +33,7 @@ body {
   pointer-events: none;
 }
 
+/* Profile image framed vertically */
 .profile-img {
   width: 120px;
   height: 180px;
