@@ -1,11 +1,18 @@
 /* background.js */
 /* MachtWeb-inspired red glow particle mesh using #sidebar-bg-canvas */
+/* Includes debugging flag: window.backgroundAnimationStarted */
 
-window.addEventListener('DOMContentLoaded', () => {
+window.backgroundAnimationStarted = false;
+
+document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('sidebar-bg-canvas');
-  if (!canvas) return; // Ensure canvas exists before continuing
+  if (!canvas) {
+    console.error("Canvas with ID 'sidebar-bg-canvas' not found.");
+    return;
+  }
 
   const ctx = canvas.getContext('2d');
+  window.backgroundAnimationStarted = true;
 
   let width, height;
   const dots = [];
@@ -14,7 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
     maxDist: 100,
     dotRadius: 2,
     dotSpeed: 0.5,
-    glowColor: '255, 0, 0' // Red
+    glowColor: '255, 0, 0'
   };
 
   function resizeCanvas() {
@@ -46,6 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function drawLines() {
+    ctx.lineWidth = 0.4;
     for (let i = 0; i < dots.length; i++) {
       for (let j = i + 1; j < dots.length; j++) {
         const dx = dots[i].x - dots[j].x;
@@ -57,7 +65,6 @@ window.addEventListener('DOMContentLoaded', () => {
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[j].x, dots[j].y);
           ctx.strokeStyle = `rgba(${config.glowColor}, ${1 - dist / config.maxDist})`;
-          ctx.lineWidth = 0.4;
           ctx.shadowBlur = 0;
           ctx.stroke();
         }
@@ -77,7 +84,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    ctx.globalCompositeOperation = 'lighter'; // Required for glow
+    ctx.globalCompositeOperation = 'lighter';
     drawLines();
     drawDots();
     updateDots();
