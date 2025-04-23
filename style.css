@@ -6,72 +6,74 @@ body {
   font-family: 'Inter', sans-serif;
   background-color: #ffffff;
   color: #333;
-  line-height: 1.6;
 }
 
+/* Main container holding sidebar + content */
 #container {
   display: flex;
   min-height: 100vh;
   position: relative;
 }
 
-/* Sidebar wrapper that includes canvas */
+/* === Sidebar Block and Canvas Layer === */
+
+/* Sidebar wrapper enables canvas + content stacking */
 #sidebar-wrapper {
   position: relative;
   width: 280px;
-  flex-shrink: 0;
+  z-index: 0; /* base layer */
 }
 
-/* Background animation canvas */
+/* The canvas background animation */
 #sidebar-canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 280px;
+  width: 100%;
   height: 100%;
   z-index: 0;
-  pointer-events: none;
+  pointer-events: none; /* prevent canvas from blocking clicks */
 }
 
-/* Sidebar styling (copied from Moein) */
+/* Sidebar content goes above the canvas */
 #sidebar {
   position: relative;
-  z-index: 1;
-  background-color: #fff;
   padding: 2rem 1.5rem;
+  z-index: 1; /* ensures content is visible above canvas */
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
+/* === Sidebar Styling === */
 .site-title {
-  margin: 0 0 1rem 0;
+  margin-top: 0;
   font-weight: 700;
-  font-size: 1.3rem;
-  line-height: 1.4;
-}
-
-.profile-img {
-  width: 120px;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-  margin: 1rem auto;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
 }
 
 .affiliation {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #666;
-  text-align: center;
-  margin: 0.5rem 0 1rem;
+  margin-top: 0.5rem;
 }
 
+.profile-img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 1rem auto;
+}
+
+/* Nav link layout */
 #sidebar-nav-links a {
   display: block;
-  margin: 0.4rem 0;
-  color: #005fa3;
+  margin: 0.5rem 0;
+  color: #007acc;
   text-decoration: none;
   font-weight: 500;
 }
@@ -80,26 +82,28 @@ body {
   text-decoration: underline;
 }
 
+/* Contact icons */
 #sidebar-icon-links {
   margin-top: 2rem;
-  text-align: center;
 }
 
 #sidebar-icon-links a {
-  margin: 0 0.4rem;
+  margin-right: 1rem;
   font-size: 1.2rem;
   text-decoration: none;
 }
 
 /* === Main Content Area === */
 #main-content {
-  flex-grow: 1;
+  flex: 1;
   padding: 2rem;
 }
 
 #main-content h2 {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 #main-content p {
