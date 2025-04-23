@@ -1,8 +1,8 @@
 /* background.js */
-/* Full recreation of MachtWeb's red glowing network (CodePen: mxXgNq) adapted to sidebar */
+/* MachtWeb red glow particle network — using correct canvas ID: sidebar-bg-canvas */
 
 window.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById('sidebar-canvas');
+  const canvas = document.getElementById('sidebar-bg-canvas');
   const ctx = canvas.getContext('2d');
 
   let width, height;
@@ -80,7 +80,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    ctx.globalCompositeOperation = 'lighter'; // Key for luminous blending
+    ctx.globalCompositeOperation = 'lighter'; // Important for glow
     drawLines();
     drawDots();
     updateDots();
