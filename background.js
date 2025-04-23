@@ -1,8 +1,10 @@
 /* background.js */
-/* MachtWeb red glow particle network — using correct canvas ID: sidebar-bg-canvas */
+/* MachtWeb-inspired red glow particle mesh using #sidebar-bg-canvas */
 
 window.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('sidebar-bg-canvas');
+  if (!canvas) return; // Ensure canvas exists before continuing
+
   const ctx = canvas.getContext('2d');
 
   let width, height;
@@ -12,18 +14,13 @@ window.addEventListener('DOMContentLoaded', () => {
     maxDist: 100,
     dotRadius: 2,
     dotSpeed: 0.5,
-    glowColor: '255, 0, 0' // Red glow
+    glowColor: '255, 0, 0' // Red
   };
 
   function resizeCanvas() {
     width = canvas.width = canvas.offsetWidth;
     height = canvas.height = canvas.offsetHeight;
   }
-
-  window.addEventListener('resize', () => {
-    resizeCanvas();
-    initDots();
-  });
 
   function initDots() {
     dots.length = 0;
@@ -42,14 +39,13 @@ window.addEventListener('DOMContentLoaded', () => {
       ctx.beginPath();
       ctx.arc(d.x, d.y, config.dotRadius, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${config.glowColor}, 0.8)`;
-      ctx.shadowBlur = 10;
+      ctx.shadowBlur = 15;
       ctx.shadowColor = `rgba(${config.glowColor}, 1)`;
       ctx.fill();
     }
   }
 
   function drawLines() {
-    ctx.lineWidth = 0.4;
     for (let i = 0; i < dots.length; i++) {
       for (let j = i + 1; j < dots.length; j++) {
         const dx = dots[i].x - dots[j].x;
@@ -61,6 +57,7 @@ window.addEventListener('DOMContentLoaded', () => {
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[j].x, dots[j].y);
           ctx.strokeStyle = `rgba(${config.glowColor}, ${1 - dist / config.maxDist})`;
+          ctx.lineWidth = 0.4;
           ctx.shadowBlur = 0;
           ctx.stroke();
         }
@@ -80,12 +77,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    ctx.globalCompositeOperation = 'lighter'; // Important for glow
+    ctx.globalCompositeOperation = 'lighter'; // Required for glow
     drawLines();
     drawDots();
     updateDots();
     requestAnimationFrame(animate);
   }
+
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+    initDots();
+  });
 
   resizeCanvas();
   initDots();
