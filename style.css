@@ -14,13 +14,14 @@ body {
   position: relative;
 }
 
-/* Sidebar wrapper enables absolute positioning for background canvas */
+/* Sidebar wrapper for positioning canvas and content */
 #sidebar-wrapper {
   position: relative;
   width: 280px;
+  z-index: 0;
 }
 
-/* Background animation canvas */
+/* Canvas for animated background */
 #sidebar-canvas {
   position: absolute;
   top: 0;
@@ -29,10 +30,10 @@ body {
   height: 100%;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.6;  /* 60% transparency */
+  background: transparent;
 }
 
-/* Sidebar content */
+/* Sidebar content above canvas */
 #sidebar {
   position: relative;
   padding: 2rem 1.5rem;
@@ -43,32 +44,19 @@ body {
   justify-content: space-between;
 }
 
-/* === Sidebar Content Styling === */
-.site-title {
-  margin-top: 0;
-  font-weight: 700;
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-}
-
-.affiliation {
-  font-size: 0.95rem;
-  color: #666;
-  margin-top: 0.5rem;
-}
-
-/* Profile image styled as vertical rectangle */
+/* === Profile Image - vertical rectangular frame === */
 .profile-img {
   width: 100%;
   max-width: 120px;
   height: 180px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px; /* soften corners */
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   display: block;
   margin: 1rem auto;
 }
 
+/* Sidebar link styling */
 #sidebar-nav-links a {
   display: block;
   margin: 0.5rem 0;
