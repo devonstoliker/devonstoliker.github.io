@@ -1,75 +1,117 @@
 /* style.css */
+
+/* === Global Settings === */
+/* Set font and general appearance across the page */
 body {
-  font-family: 'Inter', sans-serif;
   margin: 0;
-  padding: 0;
-  background-color: #fdfdfd;
-  color: #222;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #333;
   line-height: 1.6;
 }
 
-header {
-  text-align: center;
-  padding: 2rem 1rem;
-  background-color: #fafafa;
-  border-bottom: 1px solid #e0e0e0;
+/* === Layout Container === */
+/* Flexbox layout to place sidebar and main content side-by-side */
+#container {
+  display: flex;
+  min-height: 100vh; /* Full vertical height */
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
+/* === Sidebar === */
+/* Left panel with navigation and user identity */
+#sidebar {
+  width: 280px;
+  background-color: #f8f9fa;
+  padding: 2rem 1.5rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Style for the site title */
+.site-title {
+  margin-top: 0;
   font-weight: 700;
-}
-
-header p {
-  margin-top: 0.5rem;
-  font-weight: 300;
-  color: #555;
-}
-
-main {
-  max-width: 800px;
-  margin: auto;
-  padding: 2rem 1rem;
-}
-
-section {
-  margin-bottom: 2.5rem;
-}
-
-h2 {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 0.3rem;
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.4rem;
   margin-bottom: 1rem;
 }
 
-a {
-  color: #007acc;
-  text-decoration: none;
+/* Affiliation / role */
+.affiliation {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: 0.5rem;
 }
 
-a:hover {
+/* Profile image settings */
+.profile-img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 1rem auto;
+}
+
+/* === Navigation Links in Sidebar === */
+#sidebar-nav-links a {
+  display: block;
+  margin: 0.5rem 0;
+  color: #007acc;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+#sidebar-nav-links a:hover {
   text-decoration: underline;
 }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-  color: #777;
-  background-color: #f5f5f5;
-  border-top: 1px solid #e0e0e0;
+/* Social icon links at the bottom */
+#sidebar-icon-links {
+  margin-top: 2rem;
 }
 
-/* Responsive tweaks */
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 2rem;
+#sidebar-icon-links a {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+/* === Main Content Area === */
+/* Right side of the layout */
+#main-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Section title styling */
+#main-content h2 {
+  font-size: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Paragraph styling */
+#main-content p {
+  max-width: 800px;
+  margin-bottom: 1rem;
+}
+
+/* === Responsive Design === */
+/* On smaller screens, stack sidebar and main content */
+@media (max-width: 768px) {
+  #container {
+    flex-direction: column;
   }
 
-  main {
-    padding: 1.5rem 1rem;
+  #sidebar {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  #main-content {
+    padding: 1.5rem;
   }
 }

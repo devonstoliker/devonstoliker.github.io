@@ -1,55 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Devon Stoliker</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Import Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <header>
-    <h1>Devon Stoliker</h1>
-    <p>Neuroscience | AI | Consciousness</p>
-  </header>
+  <!-- Top-level layout container with sidebar and main content -->
+  <div id="container">
+    
+    <!-- Sidebar with name, photo, affiliation, and navigation -->
+    <div id="sidebar">
+      <header>
+        <h3 class="site-title">Devon Stoliker</h3>
+        <p class="lead">
+          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img">
+        </p>
+        <div class="affiliation">Neuroscience Researcher</div>
+      </header>
 
-  <main>
-    <section id="about">
-      <h2>About</h2>
-      <p>I'm a neuroscientist and researcher working at the intersection of perception, psychedelic science, and artificial intelligence. I use multimodal neuroimaging, machine learning, and computational modelling to study states of consciousness and brain network dynamics.</p>
-    </section>
+      <!-- Navigation links -->
+      <nav id="sidebar-nav-links">
+        <a href="index.html">Profile</a>
+        <a href="education.html">Education</a>
+        <a href="career_history.html">Career History</a>
+        <a href="publications.html">Publications</a>
+        <a href="awards.html">Awards</a>
+        <a href="talks.html">Talks</a>
+      </nav>
 
-    <section id="research">
-      <h2>Research</h2>
-      <p>My work focuses on combining predictive processing, dynamic causal modelling, and data-driven methods (e.g. CEBRA, embeddings) to understand how psychedelics modulate sensory, self-related, and affective brain circuits. I lead the PsiConnect study, the largest neuroimaging dataset collected under psilocybin to date.</p>
-    </section>
+      <!-- Contact icons -->
+      <nav id="sidebar-icon-links">
+        <a href="mailto:your.email@example.com" class="icon" title="Email">📧</a>
+        <a href="https://linkedin.com/in/yourprofile" class="icon" title="LinkedIn">🔗</a>
+      </nav>
+    </div>
 
-    <section id="publications">
-      <h2>Publications</h2>
-      <ul>
-        <li>Stoliker et al. (2025). <i>Psychedelics Align Brain Activity with Context.</i> Nature. [Submitted]</li>
-        <li>Stoliker et al. (2023). <i>Hierarchical Disruption Under Psychedelics.</i> Molecular Psychiatry, 28(4), 567–582.</li>
-        <li>More on <a href="https://scholar.google.com" target="_blank">Google Scholar</a>.</li>
-      </ul>
-    </section>
-
-    <section id="cv">
-      <h2>CV</h2>
-      <p><a href="assets/Devon_Stoliker_CV.pdf" target="_blank">Download my CV</a></p>
-    </section>
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:devon.stoliker@email.com">devon.stoliker@email.com</a></p>
-      <p>GitHub: <a href="https://github.com/devonstoliker" target="_blank">@devonstoliker</a></p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Devon Stoliker</p>
-  </footer>
+    <!-- Main content section -->
+    <div id="main-content">
+      <section id="profile-summary">
+        <h2>About Me</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed semper purus. 
+          Curabitur lacinia urna in nulla dignissim, nec volutpat lorem tincidunt. 
+          Vivamus auctor ex ac lacus fermentum, at hendrerit nulla tempor. 
+          Fusce vitae finibus velit.
+        </p>
+        <p>
+          Donec convallis felis nec mauris vulputate, vel luctus odio convallis. 
+          In hac habitasse platea dictumst. Sed vitae justo eget sapien feugiat fermentum. 
+          Aliquam erat volutpat.
+        </p>
+      </section>
+    </div>
+  </div>
 </body>
 </html>
