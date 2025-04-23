@@ -1,11 +1,10 @@
 window.backgroundAnimationStarted = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.backgroundAnimationStarted = true;
-
   const canvas = document.getElementById('sidebar-bg-canvas');
   if (!canvas) return;
 
+  window.backgroundAnimationStarted = true;
   const ctx = canvas.getContext('2d');
   let w = canvas.width = canvas.offsetWidth;
   let h = canvas.height = canvas.offsetHeight;
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
-
       p.x += p.vx;
       p.y += p.vy;
 
