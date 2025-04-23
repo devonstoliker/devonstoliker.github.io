@@ -10,38 +10,39 @@
 <body>
   <div id="container">
 
-    <!-- Sidebar -->
-    <div id="sidebar">
+    <!-- Sidebar wrapper for z-index layering -->
+    <div id="sidebar-wrapper">
       <canvas id="sidebar-canvas" aria-hidden="true"></canvas>
 
-      <header>
-        <h3 class="site-title">Devon Stoliker</h3>
-        <p class="lead">
-          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
-        </p>
-        <div class="affiliation">Neuroscience Researcher</div>
-      </header>
+      <div id="sidebar">
+        <header>
+          <h3 class="site-title">Devon Stoliker</h3>
+          <p class="lead">
+            <img src="profile.jpg" alt="Devon Stoliker" class="profile-img" />
+          </p>
+          <div class="affiliation">Neuroscience Researcher</div>
+        </header>
 
-      <nav id="sidebar-nav-links">
-        <a href="#">Profile</a>
-        <a href="#">Education</a>
-        <a href="#">Career History</a>
-        <a href="#">Publications</a>
-        <a href="#">Awards</a>
-        <a href="#">Talks</a>
-      </nav>
+        <nav id="sidebar-nav-links">
+          <a href="#">Profile</a>
+          <a href="#">Education</a>
+          <a href="#">Career History</a>
+          <a href="#">Publications</a>
+          <a href="#">Awards</a>
+          <a href="#">Talks</a>
+        </nav>
 
-      <nav id="sidebar-icon-links">
-        <a href="mailto:email@example.com" class="icon">📧</a>
-        <a href="https://linkedin.com/in/example" class="icon">🔗</a>
-      </nav>
+        <nav id="sidebar-icon-links">
+          <a href="mailto:email@example.com" class="icon">📧</a>
+          <a href="https://linkedin.com/in/example" class="icon">🔗</a>
+        </nav>
+      </div>
     </div>
 
-    <!-- Main Content -->
     <div id="main-content">
       <section id="profile-summary">
         <h2>About Me</h2>
-        <p>This is the confirmed-working animation with red glow, canvas behind all text, and no wrapper nesting issues.</p>
+        <p>This layout uses a wrapper to fix canvas layering, ensuring it's always behind your content.</p>
       </section>
     </div>
   </div>

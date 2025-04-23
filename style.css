@@ -10,19 +10,13 @@ body {
   min-height: 100vh;
 }
 
-/* Sidebar container */
-#sidebar {
-  width: 280px;
+/* Sidebar wrapper creates stacking context */
+#sidebar-wrapper {
   position: relative;
-  background-color: #ffffff;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 1;
+  width: 280px;
 }
 
-/* Animation canvas placed behind all sidebar content */
+/* Canvas now in background due to wrapper */
 #sidebar-canvas {
   position: absolute;
   top: 0;
@@ -33,7 +27,17 @@ body {
   pointer-events: none;
 }
 
-/* Profile image framed vertically */
+/* Sidebar content sits above canvas */
+#sidebar {
+  position: relative;
+  z-index: 1;
+  background-color: #ffffff;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .profile-img {
   width: 120px;
   height: 180px;
