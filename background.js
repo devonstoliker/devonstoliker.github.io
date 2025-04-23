@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ctx.lineTo(p2.x, p2.y);
           ctx.strokeStyle = "rgba(255,0,0," + (1 - dist / 140) + ")";
           ctx.lineWidth = 0.4;
+          ctx.shadowBlur = 0;
           ctx.stroke();
         }
       }
