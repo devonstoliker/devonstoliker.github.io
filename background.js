@@ -1,18 +1,9 @@
 /* background.js */
-/* MachtWeb-inspired red glow particle mesh using #sidebar-bg-canvas */
-/* Includes debugging flag: window.backgroundAnimationStarted */
+/* MachtWeb red glow particle network — using correct canvas ID: sidebar-bg-canvas */
 
-window.backgroundAnimationStarted = false;
-
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('sidebar-bg-canvas');
-  if (!canvas) {
-    console.error("Canvas with ID 'sidebar-bg-canvas' not found.");
-    return;
-  }
-
   const ctx = canvas.getContext('2d');
-  window.backgroundAnimationStarted = true;
 
   let width, height;
   const dots = [];
@@ -21,13 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
     maxDist: 100,
     dotRadius: 2,
     dotSpeed: 0.5,
-    glowColor: '255, 0, 0'
+    glowColor: '255, 0, 0' // Red glow
   };
 
   function resizeCanvas() {
     width = canvas.width = canvas.offsetWidth;
     height = canvas.height = canvas.offsetHeight;
   }
+
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+    initDots();
+  });
 
   function initDots() {
     dots.length = 0;
@@ -46,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.beginPath();
       ctx.arc(d.x, d.y, config.dotRadius, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${config.glowColor}, 0.8)`;
-      ctx.shadowBlur = 15;
+      ctx.shadowBlur = 10;
       ctx.shadowColor = `rgba(${config.glowColor}, 1)`;
       ctx.fill();
     }
@@ -84,17 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalCompositeOperation = 'lighter'; // Important for glow
     drawLines();
     drawDots();
     updateDots();
     requestAnimationFrame(animate);
   }
-
-  window.addEventListener('resize', () => {
-    resizeCanvas();
-    initDots();
-  });
 
   resizeCanvas();
   initDots();
