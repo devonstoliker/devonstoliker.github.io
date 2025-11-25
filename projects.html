@@ -2,80 +2,528 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Projects | Devon Stoliker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <script src="background.js" defer></script>
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #ffffff;
-      color: #333;
-      margin: 0;
-      padding: 2rem;
+    :root{
+      --container-max: 1200px;
+      --rail-w: 260px;
+      --gap: 32px;
+      --measure: 66ch;
+      --pad: 16px;
+      --border: #eee;
+      --accent: #007acc;
+      --icon: #444;
+      --icon-hover: #007acc;
+      --rail-nudge: -6px;
+      --slide-h: auto;
     }
-    #main-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+
+    html, body { height: 100%; margin: 0; }
+    body{
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: #111;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 0.5rem;
+      background: #fff;
+      -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+
+      /* sticky footer scaffolding */
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
     }
-    h2 {
-      font-size: 1.4rem;
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
-      color: #007acc;
+
+    .wrap{
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      box-sizing: border-box;
+
+      /* fill viewport to push footer down */
+      flex: 1 1 auto;
+      display: flex;
     }
-    ul {
-      list-style-type: disc;
-      padding-left: 1.5rem;
-      margin-top: 0.25rem;
-      margin-bottom: 1.5rem;
+
+    /* Mobile-first: rail stacks above content */
+    #container{
+      display: block;
+      flex: 1 1 auto;
     }
-    ul li {
-      margin-bottom: 0.4rem;
-      line-height: 1.5;
+
+    #sidebar{ border-bottom: 1px solid var(--border); padding: 18px 0; }
+    .sidebar-content{
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "img title"
+        "img affiliation"
+        "img nav1"
+        "img nav2";
+      column-gap: 14px;
+      row-gap: 8px;
+      align-items: start;
+      transform: translateX(var(--rail-nudge));
     }
+    .site-title{ grid-area: title; margin: 0; font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
+    .affiliation{ grid-area: affiliation; margin: 2px 0 4px; font-weight: 500; color: #333; line-height: 1.35; }
+    .profile-img{ grid-area: img; width: 88px; height: auto; border-radius: 10px; justify-self: center; display: block; float: none; }
+
+    #sidebar-nav-links{ grid-area: nav1; }
+    #sidebar-icon-links{ grid-area: nav2; }
+
+    #sidebar-nav-links a{
+      display: inline-block; margin: 6px 12px 0 0; color: var(--accent);
+      text-decoration: none; font-weight: 500; white-space: nowrap;
+    }
+    #sidebar-nav-links a:hover{ text-decoration: underline; }
+
+    /* Icon row */
+    #sidebar-icon-links{
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 6px;
+    }
+    .icon-link{
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; color: #444; text-decoration: none;
+      transition: color .18s ease, transform .18s ease, opacity .18s ease; opacity: 0.9;
+    }
+    .icon-link:hover{ color: var(--icon-hover); transform: translateY(-1px); opacity: 1; }
+    .icon-link svg{ display: block; width: 100%; height: 100%; fill: currentColor; }
+    .sr-only{ position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; border: 0; padding: 0; margin: -1px; }
+
+    /* Main content */
+    #main-content{
+      max-width: var(--measure);
+      margin: 22px auto 0;
+      line-height: 1.75;
+
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    h1, h2{ font-weight: 700; }
+    h1{
+      font-size: clamp(1.6rem, 1.2rem + 1.1vw, 1.9rem);
+      margin: 0 0 1rem 0; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h2{ font-size: clamp(1.15rem, 1rem + .6vw, 1.35rem); margin: 1.2rem 0 .6rem; color: #111; }
+    h3{ font-size: 1rem; margin: .6rem 0 .4rem; color: #007acc; }
+
+    p{ margin: 0 0 1.05rem 0; }
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    ul{ margin: .2rem 0 1.2rem 1.1rem; padding: 0; }
+    li{ margin: .35rem 0; }
+
+    .meta{ color: #555; font-size: .95rem; }
+
+    /* ===== Carousel (same as main) ===== */
+    .studies{ margin: 1.4rem 0 2rem; }
+    .studies__title{
+      font-size: 1.15rem; font-weight: 700; margin: 0 0 .8rem 0;
+      border-bottom: 1px solid var(--border); padding-bottom: .4rem;
+    }
+    .slides{ position: relative; }
+    .slide{ display: none; margin: 0; text-align: center; }
+    .slide.is-active{ display: block; }
+    .slide__media{
+      height: var(--slide-h);
+      display: flex; align-items: center; justify-content: center;
+      background: transparent; border: none; border-radius: 0; overflow: hidden; padding: 0;
+    }
+    .slide__media picture{ display: block; max-width: 100%; max-height: 100%; }
+    .slide__media img{
+      max-width: 100%; max-height: 100%;
+      width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto;
+    }
+    .slide__caption{ font-size: .92rem; color: #555; margin-top: .5rem; min-height: 2.4em; }
+    .slides__controls{ display: flex; justify-content: center; gap: .75rem; margin-top: .6rem; }
+    .slides__btn{
+      appearance: none; border: 1px solid var(--border); background: #fff;
+      padding: .25rem .6rem; border-radius: 6px; cursor: pointer;
+    }
+    .slides__dots{ display: flex; justify-content: center; gap: .4rem; margin-top: .5rem; }
+    .dot{ width: 8px; height: 8px; border-radius: 50%; border: 1px solid #aaa; background: #ddd; cursor: pointer; }
+    .dot.is-active{ background: var(--accent); border-color: var(--accent); }
+
+    .slides.measuring .slide{ display: block !important; position: absolute; inset: 0; visibility: hidden; }
+    .slides.measuring .slide__media{ height: auto !important; }
+
+    /* Desktop layout */
+    @media (min-width: 1024px){
+      #container{ display: grid; grid-template-columns: var(--rail-w) 1fr; column-gap: var(--gap); align-items: start; }
+      #sidebar{ position: sticky; top: 0; align-self: start; height: 100dvh; overflow: auto; border-bottom: none; border-right: 1px solid var(--border); padding: 22px 0; }
+      .sidebar-content{ display: flex; flex-direction: column; align-items: center; padding: 0 8px; text-align: center; }
+      .profile-img{ width: 120px; border-radius: 12px; display: block; margin: 10px 0 14px; }
+      .site-title{ font-size: 1.15rem; margin: 0 0 6px 0; }
+      .affiliation{ margin: 0 0 10px 0; }
+      #sidebar-nav-links{ width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 4px; }
+      #sidebar-nav-links a{ margin: 0; }
+      #sidebar-icon-links{ justify-content: center; }
+      #main-content{ max-width: var(--measure); width: 100%; margin: 28px 0 0; }
+    }
+
+    @media (min-width: 1400px){ :root{ --container-max: 1280px; } }
+
+    @media (max-width: 420px){
+      .profile-img{ width: 78px; }
+      #main-content{ max-width: 60ch; }
+    }
+
+    /* ===== Footer inside main ===== */
+    .page-legal{
+      margin-top: auto;
+      padding: 16px 0 24px;
+      color: #888;
+      opacity: 0.85;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+    .page-legal small { display: inline-block; }
   </style>
 </head>
 <body>
-  <div id="main-content">
-    <h1>Projects</h1>
-    <section><h2>Untangling Addiction (Alcohol Use Disorder, Wellcome Leap)</h2><ul><li>Associated publications forthcoming</li></ul></section>
-    <section><h2>Psilocybin for Food Reward Preference</h2><ul><li>Psilocybin impact on food reward (forthcoming)</li></ul></section>
-    <section><h2>PsiConnect Study</h2><ul>
-      <li>Protocol paper</li>
-      <li>Data release paper</li>
-      <li>Main paper: <i>Psychedelics Align Brain Activity with Context</i></li>
-      <li>Out-of-body experience (collab with Olaf Blanke & Fosco Bernasconi)</li>
-      <li>Language and ego dissolution (with Greg Cooper & Jeremy Skipper)</li>
-      <li>ML-based individual prediction (with Navid)</li>
-      <li>Review: Biological Psychiatry</li>
-      <li>Brain embeddings across psychedelic substances</li>
-      <li>EEG-focused analysis (with Vindhushani)</li>
-      <li>ML-based prediction of subjective effects using baseline vs. psilocybin scans</li>
-    </ul></section>
-    <section><h2>Zurich Team Collaborations</h2><ul>
-      <li>LSD anti-correlation paper</li>
-      <li>Psilocybin and visual imagery</li>
-      <li>Psilocybin and emotion/cognition</li>
-    </ul></section>
-    <section><h2>Keio University Psilocybin Trial</h2><ul>
-      <li>First psilocybin safety and efficacy trial in Japan</li>
-    </ul></section>
-    <section><h2>Meditation-Related Projects</h2><ul>
-      <li>Psychedelics & MBCT integration study (published)</li>
-      <li>PsiConnect meditation intervention outcome paper (forthcoming)</li>
-    </ul></section>
-    <section><h2>Expected Additional Publications</h2><ul>
-      <li>EEG-focused case study</li>
-      <li>Music-related analysis</li>
-      <li>One additional forthcoming paper (TBD)</li>
-    </ul></section>
+  <!-- Optional background canvas aligned with rail -->
+  <canvas id="sidebar-canvas"></canvas>
+
+  <div class="wrap">
+    <div id="container">
+      <!-- Sidebar -->
+      <aside id="sidebar" role="complementary" aria-label="Site">
+        <div class="sidebar-overlay"></div>
+        <div class="sidebar-content">
+          <h1 class="site-title">Devon Stoliker</h1>
+          <p class="affiliation">Neuroscientist | Psychedelic Researcher | Systems Theorist</p>
+          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img">
+
+          <nav id="sidebar-nav-links" aria-label="Primary">
+            <a href="index.html">Main</a>
+            <a href="projects.html" aria-current="page">Projects</a>
+            <a href="https://scholar.google.com/citations?user=fQayzXQAAAAJ">Publications</a>
+            <a href="systemstheory.html">Systems Theory</a>
+          </nav>
+
+          <nav id="sidebar-icon-links" aria-label="External">
+            <a class="icon-link" href="mailto:devon.stoliker@monash.edu" title="Email" aria-label="Email">
+              <span class="sr-only">Email</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><path d="M3 7l9 6 9-6" /></svg>
+            </a>
+            <a class="icon-link" href="https://x.com/dpsyc42" title="X (Twitter)" aria-label="X (Twitter)">
+              <span class="sr-only">X (Twitter)</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 3H20l-6.9 8.1L21.5 21H15l-5-5.8L4 21H1.6l7.7-9.1L2.1 3H8l4.5 5.2L17.6 3Zm-2 16h1.5L8.5 5H7l8.6 14Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://au.linkedin.com/in/devon-stoliker-110999181" title="LinkedIn" aria-label="LinkedIn">
+              <span class="sr-only">LinkedIn</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 2.5 6a2.5 2.5 0 0 1 2.48-2.5ZM3 8h4v13H3V8Zm7 0h3.8v1.8h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.77 2.65 4.77 6.1V21h-4v-5.6c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95V21h-4V8Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://github.com/devonstoliker/devonstoliker.github.io" title="GitHub" aria-label="GitHub">
+              <span class="sr-only">GitHub</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.1.82-.26.82-.58v-2.02c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.35-1.77-1.35-1.77-1.1-.76.08-.75.08-.75 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.84 1.32 3.53 1.01.11-.8.42-1.32.76-1.62-2.66-.3-5.47-1.33-5.47-5.92 0-1.31.47-2.38 1.25-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.17.78.84 1.25 1.9 1.25 3.22 0 4.6-2.81 5.61-5.49 5.91.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .5Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://scholar.google.com/citations?user=fQayzXQAAAAJ" title="Google Scholar" aria-label="Google Scholar">
+              <span class="sr-only">Google Scholar</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 10l10 7 10-7-10-7Zm0 9.5L5.3 8.1 12 3.9l6.7 4.2L12 12.5Z"/><path d="M6 14.7V18l6 3 6-3v-3.3l-6 3.9-6-3.9Z"/></svg>
+            </a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main id="main-content" role="main">
+        <h1>Projects</h1>
+
+        <!-- Optional carousel to match Main page style -->
+        <section class="studies" aria-label="PsiConnect figures">
+          <h2 class="studies__title">PsiConnect figures</h2>
+          <div class="slides" data-index="0" aria-live="polite">
+            <!-- Slide 1: CEBRA -->
+            <figure class="slide is-active">
+              <div class="slide__media">
+                <picture>
+                  <source type="image/webp"
+                          srcset="study_cebra_800.webp 800w, study_cebra_1200.webp 1200w"
+                          sizes="(max-width: 600px) 90vw, 66ch" />
+                  <source type="image/png"
+                          srcset="study_cebra_800.png 800w, study_cebra_1200.png 1200w"
+                          sizes="(max-width: 600px) 90vw, 66ch" />
+                  <img src="study_cebra_1200.png" alt="CEBRA embeddings and silhouette scores" loading="eager" decoding="async" />
+                </picture>
+              </div>
+              <figcaption class="slide__caption">Machine-Learning reveals hidden context-separable organisation under psilocybin</figcaption>
+            </figure>
+
+            <!-- Slide 2: FC -->
+            <figure class="slide" hidden>
+              <div class="slide__media">
+                <picture>
+                  <source type="image/webp"
+                          srcset="study_fc_800.webp 800w, study_fc_1200.webp 1200w"
+                          sizes="(max-width: 600px) 90vw, 66ch" />
+                  <source type="image/png"
+                          srcset="study_fc_800.png 800w, study_fc_1200.png 1200w"
+                          sizes="(max-width: 600px) 90vw, 66ch" />
+                  <img src="study_fc_1200.png" alt="Functional connectivity matrices figure" loading="eager" decoding="async" />
+                </picture>
+              </div>
+              <figcaption class="slide__caption">fMRI functional connectivity matrices varied between movie and other conditions</figcaption>
+            </figure>
+
+            <!-- Slide 3: EEG -->
+            <figure class="slide" hidden>
+              <div class="slide__media">
+                <picture>
+                  <source type="image/webp"
+                          srcset="study_eeg_800.webp 800w, study_eeg_1200.webp 1200w"
+                          sizes="(max-width: 600px) 90vw, 66ch" />
+                  <source type="image/png"
+                          srcset="study_eeg_800.png 800w, study_eeg_1200.png 1200w"
+                          sizes="(max-width: 600px) 90vw, 66ch" />
+                  <img src="study_eeg_1200.png" alt="EEG panel derived from uploaded figure" loading="eager" decoding="async" />
+                </picture>
+              </div>
+              <figcaption class="slide__caption">Movie watching had a grounding effect on psilocybin effects during EEG</figcaption>
+            </figure>
+          </div>
+
+          <div class="slides__controls">
+            <button class="slides__btn" data-dir="prev" aria-label="Previous slide">‹</button>
+            <button class="slides__btn" data-dir="next" aria-label="Next slide">›</button>
+          </div>
+
+          <div class="slides__dots" role="tablist" aria-label="Slide selector">
+            <button class="dot is-active" role="tab" aria-selected="true" aria-label="Slide 1 (CEBRA)"></button>
+            <button class="dot" role="tab" aria-selected="false" aria-label="Slide 2 (FC)"></button>
+            <button class="dot" role="tab" aria-selected="false" aria-label="Slide 3 (EEG)"></button>
+          </div>
+        </section>
+
+        <!-- ===== Project listings ===== -->
+        <section aria-label="PsiConnect Study">
+          <h2>PsiConnect Study</h2>
+          <ul>
+            <li class="meta"><strong>Status:</strong> Complete, with multiple outputs under review.</li>
+            <li>Australia’s first psychedelic imaging trial, investigating interactions between psilocybin, brain connectivity, context and behaviour in healthy adults.</li>
+            <li>World’s largest  fMRI dataset collected under psychedelics to date by sample size (N = 65). 
+            <li>Extensive baseline imaging and imaging under the effects of 19 mg psilocybin using both MRI and EEG, with before and longitudinal after behavioural measures.</li>
+            <li>Large supportive interdisciplinary team including
+  <a href="https://scholar.google.com/citations?user=Ci5AsaQAAAAJ&hl=en">Leonardo Novelli</a>,
+  <a href="https://moein-khajehnejad.github.io/">Moein Khajehnejad</a>, and
+  <a href="https://comp-neuro.github.io/index.html">Adeel Razi.</a> 
+   <li>This research reveals a subject-level signature of the transformative psychedelic state and advanced how we understand context-dependent reorganisation of brain networks during the psychedelic state.</p>
+
+            
+            <h3>Outputs</h3>
+            <li><strong>Main paper:</strong> <a href="https://www.biorxiv.org/content/10.1101/2025.03.09.642197v1"><i>Psychedelics Align Brain Activity with Context</i></a></li>
+            <li>Data descriptor: <a href="https://www.biorxiv.org/content/10.1101/2025.04.11.643415v2"> <i>PsiConnect: A Multimodal Neuroimaging Dataset of Context-Dependent Brain and Behaviour Dynamics under Psilocybin</i></a></li>
+            <li>Protocol paper (in preparation)</li>
+            <li>Out-of-body experience (collab with Olaf Blanke and Fosco Bernasconi)<a href="https://www.medrxiv.org/content/10.1101/2025.06.24.25330245v1"> <i>Psilocybin Modulates TPJ Effective Connectivity during Out-of-Body Experiences</i></a></li>
+            <li>Language and ego dissolution (collab with Greg Cooper and Jeremy Skipper)</li>
+            <li>Claustrum connectivity (Navid Shams Masjedi)</li>
+            <li>EEG-focused analysis (in preparation)</li>
+            <li><i>Biological Psychiatry</i> review (in preparation)</li>
+            <li>Mindset measure validation with Rosalind McAlpine (implemented)</li>
+            <li>Brain embeddings across psychedelic substances (in preparation)</li>
+            <li>EEG-focused case study (planned)</li>
+            <li>Music-related analysis (planned)</li>
+            
+          </ul>
+        </section>
+
+        <section aria-label="Keio University Psilocybin Trial">
+          <h2>Keio University Psilocybin Trial</h2>
+          <h3>Lead investigators: Professor Hiroyuki Uchida and Keisuke Kusudo</h3>
+          <ul>
+            <li>Japan’s first serotonergic psychedelic clinical trial, evaluating safety and efficacy of psilocybin in treatment-resistant depression, with low (10 mg) and high (25 mg) doses across multiple sessions.</li>
+            <li>Advisory role on trial design, emphasising mindset and contextual factors. Curated therapeutic music playlists tailored to each dosing session.</li>
+            <li class="meta"><strong>Status:</strong> Implementation phase.</li>
+          </ul>
+        </section>
+
+        <section aria-label="Opioid Use Disorder">
+          <h2>Psilocybin for Opioid Use Disorder</h2>
+          <h3>Untangling Addiction (Wellcome Leap)</h3>
+          <ul>
+            <li>Associated publications forthcoming.</li>
+            <li class="meta"><strong>Status:</strong> Design and recruitment phase.</li>
+          </ul>
+        </section>
+
+        <section aria-label="AUD targets">
+          <h2>Addiction neurocircuitry targets for Alcohol Use Disorder</h2>
+          <h3>With Antonio Verdejo-García, Untangling Addiction (Wellcome Leap)</h3>
+          <ul>
+            <li>Mechanistic targeting of circuits for potential neuromodulation.</li>
+            <li class="meta"><strong>Status:</strong> Trial ongoing.</li>
+          </ul>
+        </section>
+
+        <section aria-label="Food reward">
+          <h2>Psilocybin for Food Reward Preference</h2>
+          <h3>With Claire Foldi</h3>
+          <ul>
+            <li>fMRI study of reward circuits under psilocybin.</li>
+            <li class="meta"><strong>Status:</strong> Design and recruitment phase.</li>
+          </ul>
+        </section>
+
+        <section aria-label="Zurich collaborations">
+          <h2>Zurich team collaborations</h2>
+          <h3>With Katrin Preller and Franz Vollenweider</h3>
+          <ul>
+            <li>LSD anti-correlation paper</li>
+            <li>Psilocybin and visual imagery</li>
+            <li>Psilocybin and emotion/cognition</li>
+          </ul>
+        </section>
+
+        <section aria-label="Meditation projects">
+          <h2>Psilocybin and Meditation Projects</h2>
+          <h3>With Otto Simmonson</h3>
+          <ul>
+            <li>Psychedelics and MBCT integration study</li>
+            <li>PsiConnect meditation intervention outcome paper (forthcoming)</li>
+          </ul>
+        </section>
+
+        <section aria-label="Predictive coding">
+          <h2>Predictive Coding Publications</h2>
+          <ul>
+            <li>Neural mechanisms and psychology of psychedelic ego dissolution with Karl Friston, Gary Egan and Adeel Razi.</li>
+            <li>Predictive coding precision and psychedelics.</li>
+          </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer class="page-legal" aria-label="Legal notice">
+          <small>© 2025 Devon Stoliker. All rights reserved.</small>
+        </footer>
+      </main>
+    </div>
   </div>
+
+  <!-- Keep canvas aligned with rail; harmless on mobile -->
+  <style>
+    #sidebar-canvas{
+      position: fixed; top: 0; left: 0; width: var(--rail-w); height: 100dvh;
+      z-index: 0; pointer-events: none;
+    }
+    @media (max-width: 1023.98px){
+      #sidebar-canvas{ position: static; width: 100%; height: 180px; }
+    }
+  </style>
+
+  <!-- Carousel + Spark script (same as main) -->
+  <script>
+    (function(){
+      /* ===== Carousel ===== */
+      const root = document.querySelector('.studies');
+      if(root){
+        const slidesWrap = root.querySelector('.slides');
+        const slides = Array.from(root.querySelectorAll('.slide'));
+        const dotsWrap = root.querySelector('.slides__dots');
+        const dots = Array.from(dotsWrap.querySelectorAll('.dot'));
+        const btnPrev = root.querySelector('[data-dir="prev"]');
+        const btnNext = root.querySelector('[data-dir="next"]');
+
+        [btnPrev, btnNext, ...dots].forEach(el => el && (el.disabled = true));
+
+        function show(i){
+          const n = slides.length;
+          const idx = ((i % n) + n) % n;
+          slides.forEach((s,j)=>{
+            const on = j === idx;
+            s.classList.toggle('is-active', on);
+            s.hidden = !on;
+          });
+          dots.forEach((d,j)=>{
+            const on = j === idx;
+            d.classList.toggle('is-active', on);
+            d.setAttribute('aria-selected', on ? 'true' : 'false');
+          });
+          slidesWrap.dataset.index = idx;
+        }
+
+        async function decodeAllImages(){
+          const imgs = Array.from(slidesWrap.querySelectorAll('img'));
+          const decoders = imgs.map(img => {
+            if (img.complete) return Promise.resolve();
+            if (typeof img.decode === 'function') {
+              return img.decode().catch(()=>{});
+            }
+            return new Promise(res => img.addEventListener('load', res, {once:true}));
+          });
+          await Promise.all(decoders);
+        }
+
+        async function measureTallest(){
+          slidesWrap.classList.add('measuring');
+          void slidesWrap.offsetHeight;
+          const heights = slides.map(slide => {
+            const media = slide.querySelector('.slide__media');
+            return media ? media.getBoundingClientRect().height : 0;
+          });
+          const maxH = Math.max(...heights, 0);
+          slidesWrap.style.setProperty('--slide-h', maxH + 'px');
+          slidesWrap.classList.remove('measuring');
+        }
+
+        function enableControls(){
+          [btnPrev, btnNext, ...dots].forEach(el => el && (el.disabled = false));
+        }
+
+        btnPrev?.addEventListener('click', ()=> show(Number(slidesWrap.dataset.index||0) - 1));
+        btnNext?.addEventListener('click', ()=> show(Number(slidesWrap.dataset.index||0) + 1));
+        dots.forEach((d, j)=> d.addEventListener('click', ()=> show(j)));
+
+        slides.forEach((s,i)=> { if(i>0) s.hidden = true; });
+        slidesWrap.dataset.index = 0;
+        show(0);
+
+        (async () => {
+          await decodeAllImages();
+          await measureTallest();
+          enableControls();
+        })();
+
+        let rAF = null;
+        window.addEventListener('resize', () => {
+          if (rAF) cancelAnimationFrame(rAF);
+          rAF = requestAnimationFrame(measureTallest);
+        }, { passive: true });
+      }
+
+      /* ===== Spark (not used on this page, but harmless to keep parity) ===== */
+      function setupSparkEmitter(el, symbol){
+        if(!el) return;
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let active = false;
+        function emit(){
+          if(active) return;
+          active = true;
+          const span = document.createElement('span');
+          span.className = 'sparkle';
+          span.textContent = symbol;
+          const dx = (Math.random() * 44 - 22).toFixed(0) + 'px';
+          span.style.setProperty('--dx', dx);
+          el.appendChild(span);
+          const cleanup = () => { span.remove(); active = false; };
+          if(prefersReduced){ setTimeout(cleanup, 900); }
+          else{
+            span.addEventListener('animationend', cleanup, {once:true});
+            setTimeout(cleanup, 1200);
+          }
+        }
+        el.addEventListener('mouseenter', emit);
+        el.addEventListener('touchstart', emit, {passive:true});
+      }
+      // No spark target on this page by default.
+    })();
+  </script>
 </body>
 </html>

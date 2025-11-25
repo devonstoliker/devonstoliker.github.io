@@ -12,3 +12,4 @@ git commit -m "Site update: $(date '+%Y-%m-%d %H:%M:%S')"
 git push origin main
 
 echo "✅ Site pushed to GitHub. Check https://devonstoliker.github.io"
+

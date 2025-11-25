@@ -2,77 +2,691 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Main | Devon Stoliker</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script src="background.js" defer></script>
   <style>
-    #main-content {
-      max-width: 900px;
-      margin: 0 auto;
+    :root{
+      --container-max: 1200px;
+      --rail-w: 260px;
+      --gap: 32px;
+      --measure: 66ch;
+      --pad: 16px;
+      --border: #eee;
+      --accent: #007acc;
+      --icon: #444;
+      --icon-hover: #007acc;
+      --rail-nudge: -6px;
+      --slide-h: auto;
     }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
+
+    html, body { height: 100%; margin: 0; }
+    body{
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: #111;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 0.5rem;
+      background: #fff;
+      -webkit-text-size-adjust: 100%;
+      overflow-x: hidden;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
     }
-    p {
-      margin-bottom: 1.25rem;
-      line-height: 1.6;
+
+    .wrap{
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      box-sizing: border-box;
+      flex: 1 1 auto;
+      display: flex;
     }
-    a {
-      color: #007acc;
-      text-decoration: none;
+
+    #container{ display: block; flex: 1 1 auto; }
+
+    #sidebar{ border-bottom: 1px solid var(--border); padding: 18px 0; }
+    .sidebar-content{
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas:
+        "img title"
+        "img affiliation"
+        "img nav1"
+        "img nav2";
+      column-gap: 14px;
+      row-gap: 8px;
+      align-items: start;
+      transform: translateX(var(--rail-nudge));
     }
-    a:hover {
-      text-decoration: underline;
+    .site-title{ grid-area: title; margin: 0; font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
+    .affiliation{ grid-area: affiliation; margin: 2px 0 4px; font-weight: 500; color: #333; line-height: 1.35; }
+    .profile-img{ grid-area: img; width: 88px; height: auto; border-radius: 10px; justify-self: center; display: block; }
+
+    #sidebar-nav-links{ grid-area: nav1; }
+    #sidebar-icon-links{ grid-area: nav2; }
+
+    #sidebar-nav-links a{
+      display: inline-block; margin: 6px 12px 0 0; color: var(--accent);
+      text-decoration: none; font-weight: 500; white-space: nowrap;
     }
+    #sidebar-nav-links a:hover{ text-decoration: underline; }
+
+    #sidebar-icon-links{
+      display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 6px;
+    }
+    .icon-link{
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; color: #444; text-decoration: none;
+      transition: color .18s ease, transform .18s ease, opacity .18s ease; opacity: 0.9;
+    }
+    .icon-link:hover{ color: var(--icon-hover); transform: translateY(-1px); opacity: 1; }
+    .icon-link svg{ display: block; width: 100%; height: 100%; fill: currentColor; }
+    .sr-only{ position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; border: 0; padding: 0; margin: -1px; }
+
+    #main-content{
+      max-width: var(--measure);
+      margin: 22px auto 0;
+      line-height: 1.75;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    h1, h2{ font-weight: 700; }
+    h1{
+      font-size: clamp(1.6rem, 1.2rem + 1.1vw, 1.9rem);
+      margin: 0 0 1rem 0; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;
+    }
+    h2{ font-size: clamp(1.15rem, 1rem + .6vw, 1.35rem); margin: 1.2rem 0 .6rem; }
+    p{ margin: 0 0 1.05rem 0; }
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .neuro-quote{
+      position: relative; margin: 1.6rem 0; padding: 1.1rem 1.1rem 1.1rem 1.3rem;
+      background: #fafcff; border-left: 3px solid #7aa6ff; border-radius: 10px;
+      font-weight: 300; font-size: 1.02rem; line-height: 1.8;
+    }
+    .neuro-quote blockquote{ margin: 0; }
+    .neuro-quote::before, .neuro-quote::after{
+      content: "{}"; position: absolute; top: -10px; font-weight: 700; font-size: 4.8rem;
+      line-height: 1; letter-spacing: -0.04em; opacity: 0.06; pointer-events: none; user-select: none;
+    }
+    .neuro-quote::before{ left: -10px; transform: rotate(-6deg); }
+    .neuro-quote::after { right: -8px;  transform: rotate(6deg); }
+
+    .spark-word{ position: relative; display: inline-block; cursor: default; }
+    .sparkle{
+      --dx: 0px;
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%) scale(1);
+      pointer-events: none;
+      font-size: clamp(1.3rem, 1.2rem + 0.5vw, 2rem);
+      line-height: 1;
+      opacity: 0;
+      animation: floatUp 1s ease-out forwards;
+      will-change: transform, opacity;
+      user-select: none;
+    }
+    @keyframes floatUp{
+      0%   { transform: translate(-50%, -10%) scale(0.9); opacity: 0; }
+      20%  { opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--dx)), -160%) scale(1.15); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .sparkle{ animation: none; opacity: 0.85; }
+    }
+
+    @media (min-width: 1024px){
+      #container{ display: grid; grid-template-columns: var(--rail-w) 1fr; column-gap: var(--gap); align-items: start; }
+      #sidebar{ position: sticky; top: 0; align-self: start; height: 100dvh; overflow: auto; border-bottom: none; border-right: 1px solid var(--border); padding: 22px 0; }
+      .sidebar-content{ display: flex; flex-direction: column; align-items: center; padding: 0 8px; text-align: center; }
+      .profile-img{ width: 120px; border-radius: 12px; display: block; margin: 10px 0 14px; }
+      .site-title{ font-size: 1.15rem; margin: 0 0 6px 0; }
+      .affiliation{ margin: 0 0 10px 0; }
+      #sidebar-nav-links{ width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 4px; }
+      #sidebar-nav-links a{ margin: 0; }
+      #sidebar-icon-links{ justify-content: center; }
+      #main-content{ max-width: var(--measure); width: 100%; margin: 28px 0 0; }
+    }
+
+    @media (min-width: 1400px){ :root{ --container-max: 1280px; } }
+    @media (max-width: 420px){
+      .profile-img{ width: 78px; }
+      #main-content{ max-width: 60ch; }
+      .neuro-quote{ font-size: 1rem; }
+      .neuro-quote::before, .neuro-quote::after{ font-size: 4rem; top: -8px; }
+    }
+
+    .page-legal{
+      margin-top: auto;
+      padding: 16px 0 24px;
+      color: #888;
+      opacity: 0.85;
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+    .page-legal small { display: inline-block; }
+
+    :root{
+      --p-radius: 16px;
+      --p-shadow: 0 12px 28px rgba(0,0,0,.16);
+      --p-overlay-base: .18;
+      --p-overlay-hover: .48;
+      --p-band-alpha: .42;
+    }
+
+    .projects { margin: 0.0rem 0 2.0rem; }
+    .projects__title{
+      font-size: 1.15rem; font-weight: 700; margin: 0 0 .8rem 0;
+      border-bottom: 1px solid var(--border); padding-bottom: .4rem;
+    }
+
+    .p-slides{
+      position: relative; overflow: hidden; border-radius: var(--p-radius);
+      box-shadow: var(--p-shadow); aspect-ratio: 16/9;
+      min-height: 340px; max-height: 560px; background:#000;
+      user-select: none; -webkit-user-drag: none; touch-action: pan-y pinch-zoom;
+      cursor: grab;
+    }
+    .p-slides.dragging{ cursor: grabbing; }
+
+    .p-slide{
+      position: absolute; inset: 0; display: none; margin: 0;
+      isolation:isolate; will-change: transform, opacity;
+      --p-veil-alpha: var(--p-overlay-base);
+    }
+    .p-slide.is-active{ display:block; }
+
+    .p-bg{ position:absolute; inset:0; z-index:0; }
+    .p-bg picture,.p-bg img{ display:block; width:100%; height:100% }
+    .p-bg img{ object-fit: cover; }
+
+    .p-veil{
+      position:absolute; inset:0; z-index:1; pointer-events:none;
+      background-color: rgba(0,0,0,var(--p-veil-alpha));
+      transition: background-color .18s ease;
+    }
+
+    .p-slide.p-hover-dark,
+    .p-slide:hover{
+      --p-veil-alpha: var(--p-overlay-hover);
+    }
+
+    .p-band{
+      position:absolute; inset:0; z-index:2; pointer-events:none;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,var(--p-band-alpha)) 38%,
+        rgba(0,0,0,var(--p-band-alpha)) 62%,
+        rgba(0,0,0,0) 100%);
+    }
+
+    .p-content{
+      position: relative; z-index:3; color:#fff; padding: 1.75rem 1.25rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+      transform: translateZ(0) scale(1);
+      transition: transform .18s ease, text-shadow .18s ease;
+    }
+    .p-slide.p-hover-dark .p-content,
+    .p-slide:hover .p-content{
+      transform: translateZ(0) scale(1.02);
+      text-shadow: 0 14px 26px rgba(0,0,0,.35), 0 4px 10px rgba(0,0,0,.26);
+    }
+    .p-content h3{ margin:0 0 .6rem; font-size: clamp(1.1rem,1.0rem + .6vw,1.4rem) }
+    .p-content ul{ margin:.35rem 0 0 0; padding-left:1.1rem }
+    .p-content li{ margin:.28rem 0 }
+
+    .p-controls{ display:flex; align-items:center; justify-content:space-between; gap:.75rem; margin-top:.6rem; }
+    .p-btn{ appearance:none; border:1px solid var(--border); background:#fff; padding:.35rem .7rem; border-radius:8px; cursor:pointer; font-weight:500; }
+    .p-btn:disabled{ opacity:.5; cursor:not-allowed; }
+    .p-dots{ display:flex; justify-content:center; gap:.4rem; flex:1 }
+    .p-dot{ width:9px; height:9px; border-radius:50%; border:1px solid #aaa; background:#ddd; cursor:pointer }
+    .p-dot.is-active{ background: var(--accent); border-color: var(--accent); }
+
+    .projects-cta{
+      margin-top: 0.9rem;
+      font-size: 0.95rem;
+    }
+
+    @media (min-width: 900px){ .p-content{ padding: 2.2rem 2rem; } }
   </style>
 </head>
 <body>
   <canvas id="sidebar-canvas"></canvas>
 
-  <div id="container">
-    <div id="sidebar">
-      <div class="sidebar-overlay"></div>
-      <div class="sidebar-content">
-        <h1 class="site-title">Devon Stoliker</h1>
-        <p class="affiliation">Neuroscientist & Psychedelic Researcher</p>
-        <img src="profile.jpg" alt="Devon Stoliker" class="profile-img">
+  <div class="wrap">
+    <div id="container">
+      <aside id="sidebar" role="complementary" aria-label="Site">
+        <div class="sidebar-overlay"></div>
+        <div class="sidebar-content">
+          <h1 class="site-title">Devon Stoliker</h1>
+          <p class="affiliation">Neuroscientist | Psychedelic Researcher | Systems Theorist </p>
+          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img">
 
-        <nav id="sidebar-nav-links">
-          <a href="index.html">Main</a>
-          <a href="projects.html">Projects</a>
-          <a href="publications.html">Publications</a>
-        </nav>
+          <nav id="sidebar-nav-links" aria-label="Primary">
+            <a href="index.html">Main</a>
+            <a href="projects.html">Projects</a>
+            <a href="https://scholar.google.com/citations?user=fQayzXQAAAAJ">Publications</a>
+            <a href="systemstheory.html">Systems Theory</a>
+          </nav>
 
-        <nav id="sidebar-icon-links">
-          <a href="mailto:your.email@example.com" title="Email">📧</a>
-          <a href="https://linkedin.com/in/yourprofile" title="LinkedIn">🔗</a>
-          <a href="https://scholar.google.com/citations?user=fQayzXQAAAAJ" title="Google Scholar">🎓</a>
-          <a href="https://github.com/devonstoliker" title="GitHub">🐱</a>
-        </nav>
+          <nav id="sidebar-icon-links" aria-label="External">
+            <a class="icon-link" href="mailto:devon.stoliker@monash.edu" title="Email" aria-label="Email">
+              <span class="sr-only">Email</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><path d="M3 7l9 6 9-6" /></svg>
+            </a>
+            <a class="icon-link" href="https://x.com/dpsyc42" title="X (Twitter)" aria-label="X (Twitter)">
+              <span class="sr-only">X (Twitter)</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 3H20l-6.9 8.1L21.5 21H15l-5-5.8L4 21H1.6l7.7-9.1L2.1 3H8l4.5 5.2L17.6 3Zm-2 16h1.5L8.5 5H7l8.6 14Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://au.linkedin.com/in/devon-stoliker-110999181" title="LinkedIn" aria-label="LinkedIn">
+              <span class="sr-only">LinkedIn</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 2.5 6a2.5 2.5 0 0 1 2.48-2.5ZM3 8h4v13H3V8Zm7 0h3.8v1.8h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.77 2.65 4.77 6.1V21h-4v-5.6c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95V21h-4V8Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://github.com/devonstoliker/devonstoliker.github.io" title="GitHub" aria-label="GitHub">
+              <span class="sr-only">GitHub</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.1.82-.26.82-.58v-2.02c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.35-1.77-1.35-1.77-1.1-.76.08-.75.08-.75 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.84 1.32 3.53 1.01.11-.8.42-1.32.76-1.62-2.66-.3-5.47-1.33-5.47-5.92 0-1.31.47-2.38 1.25-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.17.78.84 1.25 1.9 1.25 3.22 0 4.6-2.81 5.61-5.49 5.91.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .5Z"/></svg>
+            </a>
+            <a class="icon-link" href="https://scholar.google.com/citations?user=fQayzXQAAAAJ" title="Google Scholar" aria-label="Google Scholar">
+              <span class="sr-only">Google Scholar</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 10l10 7 10-7-10-7Zm0 9.5L5.3 8.1 12 3.9l6.7 4.2L12 12.5Z"/><path d="M6 14.7V18l6 3 6-3v-3.3l-6 3.9-6-3.9Z"/></svg>
+            </a>
+          </nav>
+        </div>
+      </aside>
 
-        <footer class="sidebar-footer">
-          <p>© 2025. MIT License.</p>
+      <main id="main-content" role="main">
+        <p>
+          I am a neuroscientist at Monash University’s
+          <a href="https://www.monash.edu/turner-institute/adeel-razi-lab">Comp Nuero Lab</a>
+          within the Turner Institute. My work uses context-rich psychedelic neuroimaging to map how brain networks reorganise with changing conditions and psilocybin. We combine fMRI and EEG with effective connectivity and machine-learning methods to decode brain state and relate subjective experience to cortical and subcortical dynamics.
+        </p>
+
+        <p>
+          <span aria-label="at heart"></span> I am also a systems theorist curious to explore
+          <span class="spark-word" id="fortyTwoWord">life, the universe and everything</span>, with intellectual roots grounded in psychology, philosophy and physics:
+        </p>
+
+        <figure class="neuro-quote accent-double">
+          <blockquote>
+            <p>The boundaries we draw between self and other, mind and world, are the fossilised pathways of functional necessity: the outcome of long histories of behavioural patterning.
+            They helped organisms survive, societies cohere, and minds orient.
+            But while causally real, the separateness is an artefact of evolutionary perceptual modelling — adaptive fictions that conceal the underlying continuity between organism and environment.
+            Neuroscience increasingly reveals that what we experience as external arises from a unified modelling process generated by the brain’s reference frame, which maps both the body and world through sensory and logical structures tuned for adaptation and relational coherence. 
+
+            When individuals become more attuned to their embedded state, as part of a greater system, whether through self-awareness, context sensitivity, or states of expanded consciousness, they are better able to see through the useful fictions of constructed divisions to our integrated nature. 
+            And, in doing so, are better guided toward healthy, meaningful interaction.</p>
+          </blockquote>
+        </figure>
+
+        <section class="projects" aria-label="Projects">
+          <h2 class="projects__title">Latest Projects</h2>
+
+          <div class="p-slides" data-index="0" aria-live="polite">
+            <figure class="p-slide is-active" aria-label="PsiConnect project">
+              <div class="p-bg">
+                <picture>
+                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
+                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
+                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
+                </picture>
+              </div>
+              <div class="p-veil" aria-hidden="true"></div>
+              <div class="p-band" aria-hidden="true"></div>
+              <div class="p-content">
+                <h3>PsiConnect Study</h3>
+                <ul>
+                  <li>Australia’s first psychedelic imaging trial; psilocybin × connectivity × context.</li>
+                  <li>World’s largest by sample (N≈65): baseline + 19 mg psilocybin; MRI & EEG; longitudinal behavioural follow-up.</li>
+                  <li>Role: protocol design, implementation, participant guidance, and analysis.</li>
+                  <li>Status: complete; multiple outputs under prep and review.</li>
+                  <li>Flagship manuscript:
+                    <a href="https://www.biorxiv.org/content/10.1101/2025.03.09.642197v1">
+                      <em>Psychedelics Align Brain Activity with Context</em>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </figure>
+
+            <figure class="p-slide" hidden aria-label="Keio University psilocybin trial">
+              <div class="p-bg">
+                <picture>
+                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
+                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
+                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
+                </picture>
+              </div>
+              <div class="p-veil" aria-hidden="true"></div>
+              <div class="p-band" aria-hidden="true"></div>
+              <div class="p-content">
+                <h3>Keio University Psilocybin Trial</h3>
+                <ul>
+                  <li>Advisor on Japan’s first serotonergic psychedelic clinical trial for TRD.</li>
+                  <li>Evaluation of psilocybin safety and efficacy (10 mg & 25 mg).</li>
+                  <li>Role: curated therapeutic music; advisory input on mindset and contextual design.</li>
+                  <li>Status: implementation phase.</li>
+                </ul>
+              </div>
+            </figure>
+
+            <figure class="p-slide" hidden aria-label="Opioid Use Disorder">
+              <div class="p-bg">
+                <picture>
+                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
+                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
+                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
+                </picture>
+              </div>
+              <div class="p-veil" aria-hidden="true"></div>
+              <div class="p-band" aria-hidden="true"></div>
+              <div class="p-content">
+                <h3>Psilocybin for Opioid Use Trial</h3>
+                <ul>
+                  <li>Wellcome Leap UA clinical therapy trial; comparator design (low vs high dose).</li>
+                  <li>Role: trial design and neuroimaging analysis.</li>
+                  <li>Status: planning and recruitment phase.</li>
+                </ul>
+              </div>
+            </figure>
+
+            <figure class="p-slide" hidden aria-label="AUD neurocircuitry">
+              <div class="p-bg">
+                <picture>
+                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
+                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
+                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
+                </picture>
+              </div>
+              <div class="p-veil" aria-hidden="true"></div>
+              <div class="p-band" aria-hidden="true"></div>
+              <div class="p-content">
+                <h3>Addiction Neurocircuitry Targets</h3>
+                <ul>
+                  <li>Wellcome Leap UA machine-learning informed fMRI–TMS study for alcohol use.</li>
+                  <li>Translational focus on addiction neurocircuitry targets.</li>
+                  <li>Role: neuroimaging analysis.</li>
+                  <li>Status: implementation phase.</li>
+                </ul>
+              </div>
+            </figure>
+
+            <figure class="p-slide" hidden aria-label="Food Reward Preference">
+              <div class="p-bg">
+                <picture>
+                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
+                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
+                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
+                </picture>
+              </div>
+              <div class="p-veil" aria-hidden="true"></div>
+              <div class="p-band" aria-hidden="true"></div>
+              <div class="p-content">
+                <h3>Psilocybin for Food Reward and Preference</h3>
+                <ul>
+                  <li>Imaging pilot study of food reward processing under psilocybin.</li>
+                  <li>Role: design and advisory.</li>
+                  <li>Status: design &amp; recruitment.</li>
+                </ul>
+              </div>
+            </figure>
+          </div>
+
+          <div class="p-controls" aria-label="Carousel controls">
+            <button class="p-btn" data-p-dir="prev" aria-label="Previous">‹ Prev</button>
+            <div class="p-dots" role="tablist" aria-label="Slide selector">
+              <button class="p-dot is-active" role="tab" aria-selected="true"  aria-label="Slide 1"></button>
+              <button class="p-dot"           role="tab" aria-selected="false" aria-label="Slide 2"></button>
+              <button class="p-dot"           role="tab" aria-selected="false" aria-label="Slide 3"></button>
+              <button class="p-dot"           role="tab" aria-selected="false" aria-label="Slide 4"></button>
+              <button class="p-dot"           role="tab" aria-selected="false" aria-label="Slide 5"></button>
+            </div>
+            <button class="p-btn" data-p-dir="next" aria-label="Next">Next ›</button>
+          </div>
+
+          <p class="projects-cta">→ Explore my <a href="projects.html">Projects and Collaborations</a></p>
+        </section>
+
+        <section id="highlights" aria-label="Research value and scope">
+          <h2 class="projects__title">Research value &amp; scope</h2>
+          <p>I build meaning into trial design, identify it in data, and bridge the connections between Brain, Mind and Mental Health.</p>
+          <p>In my spare time I also develop original, cross-disciplinary theories of how reality is structured and experienced as interconnected systems, from cosmology to consciousness, based on systems reasoning, neuroscience, and foundational physics.</p>
+         % <p>→ Explore <a href="systemstheory.html">Systems Theory</a></p>
+        </section>
+
+        <footer class="page-legal" aria-label="Legal notice">
+          <small>© 2025 Devon Stoliker. All rights reserved.</small>
         </footer>
-      </div>
-    </div>
-
-    <div id="main-content">
-      <h1>About Me</h1>
-      <p>I’m a neuroscientist exploring how psychedelics alter brain connectivity and conscious experience. My work bridges computational modelling, machine learning, and multimodal neuroimaging (fMRI, EEG) to understand the neural dynamics underlying selfhood, perception, and therapeutic change.</p>
-
-      <p>I lead the <strong>PsiConnect study</strong>, the largest fMRI dataset collected under psilocybin to date. This research has advanced how we understand context-dependent reorganisation of brain networks during altered states. I also collaborate with international partners to develop predictive models of individual responses to psychedelics.</p>
-
-      <p>My current focus includes applying dimensionality reduction, CEBRA-based embeddings, and effective connectivity modelling to study large-scale brain dynamics in relation to subjective experience.</p>
-
-      <p>→ Explore my <a href="projects.html">Projects</a><br>
-         → View my <a href="publications.html">Publications</a></p>
+      </main>
     </div>
   </div>
+
+  <style>
+    #sidebar-canvas{
+      position: fixed; top: 0; left: 0; width: var(--rail-w); height: 100dvh;
+      z-index: 0; pointer-events: none;
+    }
+    @media (max-width: 1023.98px){
+      #sidebar-canvas{ position: static; width: 100%; height: 180px; }
+    }
+  </style>
+
+  <script>
+    (function(){
+      (function(){
+        const wrap = document.querySelector('.projects');
+        if(!wrap) return;
+
+        const slidesWrap = wrap.querySelector('.p-slides');
+        const slides = Array.from(wrap.querySelectorAll('.p-slide'));
+        const btnPrev = wrap.querySelector('[data-p-dir="prev"]');
+        const btnNext = wrap.querySelector('[data-p-dir="next"]');
+        const dots    = Array.from(wrap.querySelectorAll('.p-dot'));
+
+        let idx = 0, animating = false, activePointerId = null;
+
+        function updateDots(){
+          dots.forEach((d, j) => {
+            const on = j === idx;
+            d.classList.toggle('is-active', on);
+            d.setAttribute('aria-selected', on ? 'true' : 'false');
+          });
+          slidesWrap.dataset.index = idx;
+        }
+        function mod(n,m){ return ((n % m)+m)%m; }
+
+        function fadeTo(nextIdx){
+          if(animating || nextIdx === idx) return;
+          animating = true;
+          const cur = slides[idx], nxt = slides[nextIdx];
+          [cur,nxt].forEach(s => {
+            s.style.transition='none';
+            s.style.display='block';
+            s.hidden=false;
+            s.style.opacity='';
+            s.style.transform='translateX(0%)';
+          });
+          cur.style.opacity='1';
+          nxt.style.opacity='0';
+          void nxt.offsetWidth;
+          cur.style.transition='opacity .84s ease';
+          nxt.style.transition='opacity .84s ease';
+          nxt.style.opacity='1';
+          cur.style.opacity='0';
+          const done = () => {
+            slides.forEach((s,i)=>{
+              if(i!==nextIdx){ s.style.display='none'; s.hidden=true; }
+              else { s.style.display='block'; s.hidden=false; }
+              s.style.opacity='';
+              s.style.transition='';
+              s.style.transform='';
+            });
+            idx = nextIdx;
+            updateDots();
+            animating=false;
+          };
+          const onEnd = (e)=>{ if(e.target===cur || e.target===nxt){ slidesWrap.removeEventListener('transitionend', onEnd); done(); } };
+          slidesWrap.addEventListener('transitionend', onEnd);
+        }
+
+        let startX=0, deltaX=0, dragging=false, width=0, vx=0, lastX=0, lastT=0;
+
+        function setupNeighbors(i){
+          slides.forEach((s,j)=>{
+            s.style.transition='none';
+            if(j===i){ s.style.display='block'; s.hidden=false; s.style.transform='translateX(0%)'; }
+            else if(j===mod(i-1,slides.length)){ s.style.display='block'; s.hidden=false; s.style.transform='translateX(-100%)'; }
+            else if(j===mod(i+1,slides.length)){ s.style.display='block'; s.hidden=false; s.style.transform='translateX(100%)'; }
+            else { s.style.display='none'; s.hidden=true; s.style.transform=''; }
+            s.style.opacity='';
+          });
+        }
+
+        function onPointerDown(e){
+          if(animating) return;
+          dragging = true;
+          slidesWrap.classList.add('dragging');
+          activePointerId = e.pointerId;
+          slidesWrap.setPointerCapture?.(activePointerId);
+          width = slidesWrap.getBoundingClientRect().width;
+          startX = e.clientX;
+          deltaX=0; vx=0; lastX=startX; lastT=performance.now();
+          setupNeighbors(idx);
+          slides[idx].classList.add('p-hover-dark');
+        }
+
+        function onPointerMove(e){
+          if(!dragging) return;
+          const x = e.clientX;
+          deltaX = x - startX;
+          const now = performance.now();
+          const dt = now - lastT;
+          if(dt>0){
+            vx=(x-lastX)/dt;
+            lastX=x;
+            lastT=now;
+          }
+          const cur=slides[idx];
+          const prev=slides[mod(idx-1,slides.length)];
+          const next=slides[mod(idx+1,slides.length)];
+          const p = Math.max(-1, Math.min(1, deltaX/width));
+          cur.style.transform  = `translateX(${p*100}%)`;
+          prev.style.transform = `translateX(${(p-1)*100}%)`;
+          next.style.transform = `translateX(${(p+1)*100}%)`;
+        }
+
+        function onPointerUp(){
+          if(!dragging) return;
+          dragging=false;
+          slidesWrap.classList.remove('dragging');
+          slidesWrap.releasePointerCapture?.(activePointerId);
+          slides[idx].classList.remove('p-hover-dark');
+          const threshold=0.22, fast=Math.abs(vx)>0.6;
+          let target=idx;
+          if(deltaX >  width*threshold || (fast && deltaX>0)) target = mod(idx-1,slides.length);
+          else if(deltaX < -width*threshold || (fast && deltaX<0)) target = mod(idx+1,slides.length);
+
+          const cur=slides[idx];
+          const prev=slides[mod(idx-1,slides.length)];
+          const next=slides[mod(idx+1,slides.length)];
+          [cur,prev,next].forEach(s=> s.style.transition='transform .28s ease');
+
+          if(target===idx){
+            cur.style.transform='translateX(0%)';
+            prev.style.transform='translateX(-100%)';
+            next.style.transform='translateX(100%)';
+            const done=()=>{
+              [cur,prev,next].forEach(s=> s.style.transition='');
+              slides.forEach((s,i)=>{
+                if(i!==idx){ s.style.display='none'; s.hidden=true; s.style.transform=''; }
+                else { s.style.display='block'; s.hidden=false; }
+              });
+            };
+            cur.addEventListener('transitionend', done, {once:true});
+          }else{
+            if(target===mod(idx+1,slides.length)){
+              cur.style.transform='translateX(-100%)';
+              next.style.transform='translateX(0%)';
+            }else{
+              cur.style.transform='translateX(100%)';
+              prev.style.transform='translateX(0%)';
+            }
+            const done=()=>{
+              slides.forEach((s,i)=>{
+                if(i!==target){ s.style.display='none'; s.hidden=true; s.style.transform=''; }
+                else { s.style.display='block'; s.hidden=false; s.style.transform=''; }
+                s.style.transition='';
+              });
+              idx=target;
+              updateDots();
+            };
+            slidesWrap.addEventListener('transitionend', done, {once:true});
+          }
+        }
+
+        slidesWrap.addEventListener('pointerdown', onPointerDown);
+        window.addEventListener('pointermove', onPointerMove, {passive:true});
+        window.addEventListener('pointerup', onPointerUp);
+        window.addEventListener('pointercancel', onPointerUp);
+
+        slides.forEach(slide=>{
+          slide.addEventListener('pointerdown', ()=> slide.classList.add('p-hover-dark'));
+          window.addEventListener('pointerup', ()=> slide.classList.remove('p-hover-dark'));
+          slide.addEventListener('pointercancel', ()=> slide.classList.remove('p-hover-dark'));
+          slide.addEventListener('click', () => {
+            slide.classList.add('p-hover-dark');
+            setTimeout(()=> slide.classList.remove('p-hover-dark'), 240);
+          });
+        });
+
+        btnPrev.addEventListener('click', ()=> fadeTo(mod(idx-1,slides.length)));
+        btnNext.addEventListener('click', ()=> fadeTo(mod(idx+1,slides.length)));
+        dots.forEach((d,j)=> d.addEventListener('click', ()=> fadeTo(j)));
+
+        slides.forEach((s,i)=>{
+          if(i>0) s.hidden=true;
+          s.style.opacity='';
+          s.style.transform='';
+          s.style.display = i===0?'block':'none';
+        });
+        slidesWrap.dataset.index='0';
+        updateDots();
+      })();
+
+      function setupSparkEmitter(el, symbol){
+        if(!el) return;
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let active = false;
+        function emit(){
+          if(active) return;
+          active = true;
+          const span = document.createElement('span');
+          span.className = 'sparkle';
+          span.textContent = symbol;
+          const dx = (Math.random() * 44 - 22).toFixed(0) + 'px';
+          span.style.setProperty('--dx', dx);
+          el.appendChild(span);
+          const cleanup = () => { span.remove(); active = false; };
+          if(prefersReduced){ setTimeout(cleanup, 900); }
+          else {
+            span.addEventListener('animationend', cleanup, {once:true});
+            setTimeout(cleanup, 1200);
+          }
+        }
+        el.addEventListener('mouseenter', emit);
+        el.addEventListener('touchstart', emit, {passive:true});
+        let over=false;
+        el.addEventListener('pointerenter', ()=>{ over=true; });
+        el.addEventListener('pointerleave', ()=>{ over=false; });
+        window.addEventListener('scroll', ()=>{ if(over) emit(); }, {passive:true});
+      }
+      setupSparkEmitter(document.getElementById('fortyTwoWord'), '42');
+    })();
+  </script>
 </body>
 </html>
