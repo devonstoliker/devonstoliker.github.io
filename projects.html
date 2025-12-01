@@ -49,27 +49,30 @@
     <main id="main-content">
       <h1>Projects</h1>
 
-      <section class="projects">
+      <section class="projects projects-carousel">
         <h2 class="projects__title">PsiConnect figures</h2>
         
         <div class="p-slides" data-index="0">
           
           <figure class="p-slide is-active">
-            <div class="p-bg-contain">
+            <div class="p-image-contain">
               <img src="study_cebra_1200.png" alt="CEBRA embeddings">
             </div>
+            <figcaption class="p-caption">Machine-Learning reveals hidden context-separable organisation</figcaption>
           </figure>
 
           <figure class="p-slide">
-             <div class="p-bg-contain">
+             <div class="p-image-contain">
               <img src="study_fc_1200.png" alt="Functional Connectivity">
             </div>
+            <figcaption class="p-caption">Functional connectivity variations between movie and resting conditions</figcaption>
           </figure>
 
           <figure class="p-slide">
-             <div class="p-bg-contain">
+             <div class="p-image-contain">
               <img src="study_eeg_1200.png" alt="EEG Analysis">
             </div>
+            <figcaption class="p-caption">EEG analysis showing grounding effects of movie watching</figcaption>
           </figure>
         </div>
 
@@ -184,7 +187,7 @@
 
   <script>
     (function(){
-      // Advanced Carousel Logic (Identical to Index)
+      // 1. CAROUSEL LOGIC
       (function(){
         const wrap = document.querySelector('.projects');
         if(!wrap) return;
