@@ -54,42 +54,21 @@
         
         <div class="p-slides" data-index="0">
           
-          <div class="p-static-bg">
-             </div>
-
           <figure class="p-slide is-active">
-            <div class="p-bg">
-              <img src="study_cebra_1200.png" alt="CEBRA embeddings" style="object-fit: contain; background: #fff;">
-            </div>
-            <div class="p-content" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
-              <h3>CEBRA Embeddings</h3>
-              <ul>
-                <li>Machine-Learning reveals hidden context-separable organisation under psilocybin.</li>
-              </ul>
+            <div class="p-bg-contain">
+              <img src="study_cebra_1200.png" alt="CEBRA embeddings">
             </div>
           </figure>
 
           <figure class="p-slide">
-             <div class="p-bg">
-              <img src="study_fc_1200.png" alt="Functional Connectivity" style="object-fit: contain; background: #fff;">
-            </div>
-            <div class="p-content" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
-              <h3>Functional Connectivity</h3>
-              <ul>
-                <li>fMRI functional connectivity matrices varied between movie and other conditions.</li>
-              </ul>
+             <div class="p-bg-contain">
+              <img src="study_fc_1200.png" alt="Functional Connectivity">
             </div>
           </figure>
 
           <figure class="p-slide">
-             <div class="p-bg">
-              <img src="study_eeg_1200.png" alt="EEG" style="object-fit: contain; background: #fff;">
-            </div>
-            <div class="p-content" style="background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
-              <h3>EEG Analysis</h3>
-              <ul>
-                <li>Movie watching had a grounding effect on psilocybin effects during EEG.</li>
-              </ul>
+             <div class="p-bg-contain">
+              <img src="study_eeg_1200.png" alt="EEG Analysis">
             </div>
           </figure>
         </div>
@@ -205,38 +184,186 @@
 
   <script>
     (function(){
-      // 1. CAROUSEL LOGIC
-      const wrap = document.querySelector('.projects');
-      if(wrap){
+      // Advanced Carousel Logic (Identical to Index)
+      (function(){
+        const wrap = document.querySelector('.projects');
+        if(!wrap) return;
+
+        const slidesWrap = wrap.querySelector('.p-slides');
         const slides = Array.from(wrap.querySelectorAll('.p-slide'));
-        const dots = Array.from(wrap.querySelectorAll('.p-dot'));
         const btnPrev = wrap.querySelector('[data-p-dir="prev"]');
         const btnNext = wrap.querySelector('[data-p-dir="next"]');
-        let idx = 0;
+        const dots    = Array.from(wrap.querySelectorAll('.p-dot'));
 
-        function showSlide(n){
-          // Loop logic
-          if(n >= slides.length) idx = 0;
-          else if(n < 0) idx = slides.length - 1;
-          else idx = n;
+        let idx = 0, animating = false, activePointerId = null;
 
-          // Update classes
-          slides.forEach((s, i) => {
-            if(i === idx) s.classList.add('is-active');
-            else s.classList.remove('is-active');
+        function updateDots(){
+          dots.forEach((d, j) => {
+            const on = j === idx;
+            d.classList.toggle('is-active', on);
+            d.setAttribute('aria-selected', on ? 'true' : 'false');
           });
+          slidesWrap.dataset.index = idx;
+        }
+        function mod(n,m){ return ((n % m)+m)%m; }
 
-          // Update dots
-          dots.forEach((d, i) => {
-            if(i === idx) d.classList.add('is-active');
-            else d.classList.remove('is-active');
+        function fadeTo(nextIdx){
+          if(animating || nextIdx === idx) return;
+          animating = true;
+          const cur = slides[idx], nxt = slides[nextIdx];
+          [cur,nxt].forEach(s => {
+            s.style.transition='none';
+            s.style.display='block';
+            s.hidden=false;
+            s.style.opacity='';
+            s.style.transform='translateX(0%)';
+          });
+          cur.style.opacity='1';
+          nxt.style.opacity='0';
+          void nxt.offsetWidth;
+          cur.style.transition='opacity .84s ease';
+          nxt.style.transition='opacity .84s ease';
+          nxt.style.opacity='1';
+          cur.style.opacity='0';
+          const done = () => {
+            slides.forEach((s,i)=>{
+              if(i!==nextIdx){ s.style.display='none'; s.hidden=true; }
+              else { s.style.display='block'; s.hidden=false; }
+              s.style.opacity='';
+              s.style.transition='';
+              s.style.transform='';
+            });
+            idx = nextIdx;
+            updateDots();
+            animating=false;
+          };
+          const onEnd = (e)=>{ if(e.target===cur || e.target===nxt){ slidesWrap.removeEventListener('transitionend', onEnd); done(); } };
+          slidesWrap.addEventListener('transitionend', onEnd);
+        }
+
+        let startX=0, deltaX=0, dragging=false, width=0, vx=0, lastX=0, lastT=0;
+
+        function setupNeighbors(i){
+          slides.forEach((s,j)=>{
+            s.style.transition='none';
+            if(j===i){ s.style.display='block'; s.hidden=false; s.style.transform='translateX(0%)'; }
+            else if(j===mod(i-1,slides.length)){ s.style.display='block'; s.hidden=false; s.style.transform='translateX(-100%)'; }
+            else if(j===mod(i+1,slides.length)){ s.style.display='block'; s.hidden=false; s.style.transform='translateX(100%)'; }
+            else { s.style.display='none'; s.hidden=true; s.style.transform=''; }
+            s.style.opacity='';
           });
         }
 
-        btnNext.addEventListener('click', () => showSlide(idx + 1));
-        btnPrev.addEventListener('click', () => showSlide(idx - 1));
-        dots.forEach((d, i) => d.addEventListener('click', () => showSlide(i)));
-      }
+        function onPointerDown(e){
+          if(animating) return;
+          dragging = true;
+          slidesWrap.classList.add('dragging');
+          activePointerId = e.pointerId;
+          slidesWrap.setPointerCapture?.(activePointerId);
+          width = slidesWrap.getBoundingClientRect().width;
+          startX = e.clientX;
+          deltaX=0; vx=0; lastX=startX; lastT=performance.now();
+          setupNeighbors(idx);
+          slides[idx].classList.add('p-hover-dark');
+        }
+
+        function onPointerMove(e){
+          if(!dragging) return;
+          const x = e.clientX;
+          deltaX = x - startX;
+          const now = performance.now();
+          const dt = now - lastT;
+          if(dt>0){
+            vx=(x-lastX)/dt;
+            lastX=x;
+            lastT=now;
+          }
+          const cur=slides[idx];
+          const prev=slides[mod(idx-1,slides.length)];
+          const next=slides[mod(idx+1,slides.length)];
+          const p = Math.max(-1, Math.min(1, deltaX/width));
+          cur.style.transform  = `translateX(${p*100}%)`;
+          prev.style.transform = `translateX(${(p-1)*100}%)`;
+          next.style.transform = `translateX(${(p+1)*100}%)`;
+        }
+
+        function onPointerUp(){
+          if(!dragging) return;
+          dragging=false;
+          slidesWrap.classList.remove('dragging');
+          slidesWrap.releasePointerCapture?.(activePointerId);
+          slides[idx].classList.remove('p-hover-dark');
+          const threshold=0.22, fast=Math.abs(vx)>0.6;
+          let target=idx;
+          if(deltaX >  width*threshold || (fast && deltaX>0)) target = mod(idx-1,slides.length);
+          else if(deltaX < -width*threshold || (fast && deltaX<0)) target = mod(idx+1,slides.length);
+
+          const cur=slides[idx];
+          const prev=slides[mod(idx-1,slides.length)];
+          const next=slides[mod(idx+1,slides.length)];
+          [cur,prev,next].forEach(s=> s.style.transition='transform .28s ease');
+
+          if(target===idx){
+            cur.style.transform='translateX(0%)';
+            prev.style.transform='translateX(-100%)';
+            next.style.transform='translateX(100%)';
+            const done=()=>{
+              [cur,prev,next].forEach(s=> s.style.transition='');
+              slides.forEach((s,i)=>{
+                if(i!==idx){ s.style.display='none'; s.hidden=true; s.style.transform=''; }
+                else { s.style.display='block'; s.hidden=false; }
+              });
+            };
+            cur.addEventListener('transitionend', done, {once:true});
+          }else{
+            if(target===mod(idx+1,slides.length)){
+              cur.style.transform='translateX(-100%)';
+              next.style.transform='translateX(0%)';
+            }else{
+              cur.style.transform='translateX(100%)';
+              prev.style.transform='translateX(0%)';
+            }
+            const done=()=>{
+              slides.forEach((s,i)=>{
+                if(i!==target){ s.style.display='none'; s.hidden=true; s.style.transform=''; }
+                else { s.style.display='block'; s.hidden=false; s.style.transform=''; }
+                s.style.transition='';
+              });
+              idx=target;
+              updateDots();
+            };
+            slidesWrap.addEventListener('transitionend', done, {once:true});
+          }
+        }
+
+        slidesWrap.addEventListener('pointerdown', onPointerDown);
+        window.addEventListener('pointermove', onPointerMove, {passive:true});
+        window.addEventListener('pointerup', onPointerUp);
+        window.addEventListener('pointercancel', onPointerUp);
+
+        slides.forEach(slide=>{
+          slide.addEventListener('pointerdown', ()=> slide.classList.add('p-hover-dark'));
+          window.addEventListener('pointerup', ()=> slide.classList.remove('p-hover-dark'));
+          slide.addEventListener('pointercancel', ()=> slide.classList.remove('p-hover-dark'));
+          slide.addEventListener('click', () => {
+            slide.classList.add('p-hover-dark');
+            setTimeout(()=> slide.classList.remove('p-hover-dark'), 240);
+          });
+        });
+
+        btnPrev.addEventListener('click', ()=> fadeTo(mod(idx-1,slides.length)));
+        btnNext.addEventListener('click', ()=> fadeTo(mod(idx+1,slides.length)));
+        dots.forEach((d,j)=> d.addEventListener('click', ()=> fadeTo(j)));
+
+        slides.forEach((s,i)=>{
+          if(i>0) s.hidden=true;
+          s.style.opacity='';
+          s.style.transform='';
+          s.style.display = i===0?'block':'none';
+        });
+        slidesWrap.dataset.index='0';
+        updateDots();
+      })();
     })();
   </script>
 </body>
