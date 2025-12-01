@@ -2,57 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>Main | Devon Stoliker</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script src="background.js" defer></script>
 </head>
 <body>
+
   <canvas id="sidebar-canvas"></canvas>
 
   <div class="wrap">
-    <div id="container">
-      <aside id="sidebar" role="complementary" aria-label="Site">
-        <div class="sidebar-overlay"></div>
-        <div class="sidebar-content">
-          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img">
-          <h1 class="site-title">Devon Stoliker</h1>
-          <p class="affiliation">Neuroscientist | Psychedelic Researcher | Systems Theorist </p>
+    
+    <aside id="sidebar">
+      <img src="profile.jpg" alt="Devon Stoliker" class="profile-img">
+      <h1 class="site-title">Devon Stoliker</h1>
+      <div class="affiliation">
+        Neuroscientist<br>
+        Psychedelic Researcher<br>
+        Systems Theorist
+      </div>
 
-          <nav id="sidebar-nav-links" aria-label="Primary">
-            <a href="index.html">Main</a>
-            <a href="projects.html">Projects</a>
-            <a href="https://scholar.google.com/citations?user=fQayzXQAAAAJ">Publications</a>
-            <a href="systemstheory.html">Systems Theory</a>
-          </nav>
+      <nav class="nav-links">
+        <a href="index.html">Main</a>
+        <a href="projects.html">Projects</a>
+        <a href="https://scholar.google.com/citations?user=fQayzXQAAAAJ">Publications</a>
+        <a href="systemstheory.html">Systems Theory</a>
+      </nav>
 
-          <nav id="sidebar-icon-links" aria-label="External">
-            <a class="icon-link" href="mailto:devon.stoliker@monash.edu" title="Email" aria-label="Email">
-              <span class="sr-only">Email</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><path d="M3 7l9 6 9-6" /></svg>
-            </a>
-            <a class="icon-link" href="https://x.com/dpsyc42" title="X (Twitter)" aria-label="X (Twitter)">
-              <span class="sr-only">X (Twitter)</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 3H20l-6.9 8.1L21.5 21H15l-5-5.8L4 21H1.6l7.7-9.1L2.1 3H8l4.5 5.2L17.6 3Zm-2 16h1.5L8.5 5H7l8.6 14Z"/></svg>
-            </a>
-            <a class="icon-link" href="https://au.linkedin.com/in/devon-stoliker-110999181" title="LinkedIn" aria-label="LinkedIn">
-              <span class="sr-only">LinkedIn</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 1 2.5 6a2.5 2.5 0 0 1 2.48-2.5ZM3 8h4v13H3V8Zm7 0h3.8v1.8h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.77 2.65 4.77 6.1V21h-4v-5.6c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95V21h-4V8Z"/></svg>
-            </a>
-            <a class="icon-link" href="https://github.com/devonstoliker/devonstoliker.github.io" title="GitHub" aria-label="GitHub">
-              <span class="sr-only">GitHub</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.1.82-.26.82-.58v-2.02c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.35-1.77-1.35-1.77-1.1-.76.08-.75.08-.75 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.84 1.32 3.53 1.01.11-.8.42-1.32.76-1.62-2.66-.3-5.47-1.33-5.47-5.92 0-1.31.47-2.38 1.25-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.17.78.84 1.25 1.9 1.25 3.22 0 4.6-2.81 5.61-5.49 5.91.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .5Z"/></svg>
-            </a>
-            <a class="icon-link" href="https://scholar.google.com/citations?user=fQayzXQAAAAJ" title="Google Scholar" aria-label="Google Scholar">
-              <span class="sr-only">Google Scholar</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 10l10 7 10-7-10-7Zm0 9.5L5.3 8.1 12 3.9l6.7 4.2L12 12.5Z"/><path d="M6 14.7V18l6 3 6-3v-3.3l-6 3.9-6-3.9Z"/></svg>
-            </a>
-          </nav>
-        </div>
-      </aside>
+      <div class="social-icons">
+        <a class="icon-link" href="mailto:devon.stoliker@monash.edu" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><path d="M3 7l9 6 9-6" /></svg>
+        </a>
+        <a class="icon-link" href="https://x.com/dpsyc42" aria-label="X">
+          <svg viewBox="0 0 24 24"><path d="M17.6 3H20l-6.9 8.1L21.5 21H15l-5-5.8L4 21H1.6l7.7-9.1L2.1 3H8l4.5 5.2L17.6 3Zm-2 16h1.5L8.5 5H7l8.6 14Z"/></svg>
+        </a>
+        <a class="icon-link" href="https://au.linkedin.com/in/devon-stoliker-110999181" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 1 1 2.5 6a2.5 2.5 0 0 1 2.48-2.5ZM3 8h4v13H3V8Zm7 0h3.8v1.8h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.77 2.65 4.77 6.1V21h-4v-5.6c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95V21h-4V8Z"/></svg>
+        </a>
+        <a class="icon-link" href="https://github.com/devonstoliker/devonstoliker.github.io" aria-label="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.1.82-.26.82-.58v-2.02c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.35-1.77-1.35-1.77-1.1-.76.08-.75.08-.75 1.22.09 1.86 1.25 1.86 1.25 1.08 1.85 2.84 1.32 3.53 1.01.11-.8.42-1.32.76-1.62-2.66-.3-5.47-1.33-5.47-5.92 0-1.31.47-2.38 1.25-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.17.78.84 1.25 1.9 1.25 3.22 0 4.6-2.81 5.61-5.49 5.91.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .5Z"/></svg>
+        </a>
+      </div>
+    </aside>
 
-      <main id="main-content" role="main">
+    <main id="main-content">
+      
+      <section class="intro">
         <p>
           I am a neuroscientist at Monash University’s
           <a href="https://www.monash.edu/turner-institute/adeel-razi-lab">Comp Nuero Lab</a>
@@ -60,374 +56,176 @@
         </p>
 
         <p>
-          <span aria-label="at heart"></span> I am also a systems theorist curious to explore
+          I am also a systems theorist curious to explore
           <span class="spark-word" id="fortyTwoWord">life, the universe and everything</span>, with intellectual roots grounded in psychology, philosophy and physics:
         </p>
+      </section>
 
-        <figure class="neuro-quote accent-double">
-          <blockquote>
-            <p>The boundaries we draw between self and other, mind and world, are the fossilised pathways of functional necessity: the outcome of long histories of behavioural patterning.
-            They helped organisms survive, societies cohere, and minds orient.
-            But while causally real, the separateness is an artefact of evolutionary perceptual modelling — adaptive fictions that conceal the underlying continuity between organism and environment.
-            Neuroscience increasingly reveals that what we experience as external arises from a unified modelling process generated by the brain’s reference frame, which maps both the body and world through sensory and logical structures tuned for adaptation and relational coherence. 
+      <figure class="neuro-quote">
+        <blockquote>
+          <p>The boundaries we draw between self and other, mind and world, are the fossilised pathways of functional necessity... Neuroscience increasingly reveals that what we experience as external arises from a unified modelling process...</p>
+        </blockquote>
+      </figure>
 
-            When individuals become more attuned to their embedded state, as part of a greater system, whether through self-awareness, context sensitivity, or states of expanded consciousness, they are better able to see through the useful fictions of constructed divisions to our integrated nature. 
-            And, in doing so, are better guided toward healthy, meaningful interaction.</p>
-          </blockquote>
-        </figure>
-
-        <section class="projects" aria-label="Projects">
-          <h2 class="projects__title">Latest Projects</h2>
-
-          <div class="p-slides" data-index="0" aria-live="polite">
-            <figure class="p-slide is-active" aria-label="PsiConnect project">
-              <div class="p-bg">
-                <picture>
-                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
-                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
-                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
-                </picture>
-              </div>
-              <div class="p-veil" aria-hidden="true"></div>
-              <div class="p-band" aria-hidden="true"></div>
-              <div class="p-content">
-                <h3>PsiConnect Study</h3>
-                <ul>
-                  <li>Australia’s first psychedelic imaging trial; psilocybin × connectivity × context.</li>
-                  <li>World’s largest by sample (N≈65): baseline + 19 mg psilocybin; MRI & EEG; longitudinal behavioural follow-up.</li>
-                  <li>Role: protocol design, implementation, participant guidance, and analysis.</li>
-                  <li>Status: complete; multiple outputs under prep and review.</li>
-                  <li>Flagship manuscript:
-                    <a href="https://www.biorxiv.org/content/10.1101/2025.03.09.642197v1">
-                      <em>Psychedelics Align Brain Activity with Context</em>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </figure>
-
-            <figure class="p-slide" hidden aria-label="Keio University psilocybin trial">
-              <div class="p-bg">
-                <picture>
-                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
-                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
-                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
-                </picture>
-              </div>
-              <div class="p-veil" aria-hidden="true"></div>
-              <div class="p-band" aria-hidden="true"></div>
-              <div class="p-content">
-                <h3>Keio University Psilocybin Trial</h3>
-                <ul>
-                  <li>Advisor on Japan’s first serotonergic psychedelic clinical trial for TRD.</li>
-                  <li>Evaluation of psilocybin safety and efficacy (10 mg & 25 mg).</li>
-                  <li>Role: curated therapeutic music; advisory input on mindset and contextual design.</li>
-                  <li>Status: implementation phase.</li>
-                </ul>
-              </div>
-            </figure>
-
-            <figure class="p-slide" hidden aria-label="Opioid Use Disorder">
-              <div class="p-bg">
-                <picture>
-                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
-                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
-                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
-                </picture>
-              </div>
-              <div class="p-veil" aria-hidden="true"></div>
-              <div class="p-band" aria-hidden="true"></div>
-              <div class="p-content">
-                <h3>Psilocybin for Opioid Use Trial</h3>
-                <ul>
-                  <li>Wellcome Leap UA clinical therapy trial; comparator design (low vs high dose).</li>
-                  <li>Role: trial design and neuroimaging analysis.</li>
-                  <li>Status: planning and recruitment phase.</li>
-                </ul>
-              </div>
-            </figure>
-
-            <figure class="p-slide" hidden aria-label="AUD neurocircuitry">
-              <div class="p-bg">
-                <picture>
-                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
-                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
-                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
-                </picture>
-              </div>
-              <div class="p-veil" aria-hidden="true"></div>
-              <div class="p-band" aria-hidden="true"></div>
-              <div class="p-content">
-                <h3>Addiction Neurocircuitry Targets</h3>
-                <ul>
-                  <li>Wellcome Leap UA machine-learning informed fMRI–TMS study for alcohol use.</li>
-                  <li>Translational focus on addiction neurocircuitry targets.</li>
-                  <li>Role: neuroimaging analysis.</li>
-                  <li>Status: implementation phase.</li>
-                </ul>
-              </div>
-            </figure>
-
-            <figure class="p-slide" hidden aria-label="Food Reward Preference">
-              <div class="p-bg">
-                <picture>
-                  <source type="image/webp" srcset="psiconnect_bg_800_dim.webp 800w, psiconnect_bg_1200_dim.webp 1200w, psiconnect_bg_1600_dim.webp 1600w, psiconnect_bg_2400_dim.webp 2400w" sizes="100vw" />
-                  <source type="image/png"  srcset="psiconnect_bg_800_dim.png 800w,  psiconnect_bg_1200_dim.png 1200w,  psiconnect_bg_1600_dim.png 1600w,  psiconnect_bg_2400_dim.png 2400w"  sizes="100vw" />
-                  <img src="psiconnect_bg_1600_dim.webp" alt="" decoding="async" />
-                </picture>
-              </div>
-              <div class="p-veil" aria-hidden="true"></div>
-              <div class="p-band" aria-hidden="true"></div>
-              <div class="p-content">
-                <h3>Psilocybin for Food Reward and Preference</h3>
-                <ul>
-                  <li>Imaging pilot study of food reward processing under psilocybin.</li>
-                  <li>Role: design and advisory.</li>
-                  <li>Status: design &amp; recruitment.</li>
-                </ul>
-              </div>
-            </figure>
-          </div>
-
-          <div class="p-controls" aria-label="Carousel controls">
-            <button class="p-btn" data-p-dir="prev" aria-label="Previous">‹ Prev</button>
-            <div class="p-dots" role="tablist" aria-label="Slide selector">
-              <button class="p-dot is-active" role="tab" aria-selected="true"  aria-label="Slide 1"></button>
-              <button class="p-dot"           role="tab" aria-selected="false" aria-label="Slide 2"></button>
-              <button class="p-dot"           role="tab" aria-selected="false" aria-label="Slide 3"></button>
-              <button class="p-dot"           role="tab" aria-selected="false" aria-label="Slide 4"></button>
-              <button class="p-dot"           role="tab" aria-selected="false" aria-label="Slide 5"></button>
+      <section class="projects">
+        <h2>Latest Projects</h2>
+        
+        <div class="p-slides" data-index="0">
+          <figure class="p-slide is-active">
+            <div class="p-bg">
+              <img src="psiconnect_bg_1600_dim.webp" alt="PsiConnect">
             </div>
-            <button class="p-btn" data-p-dir="next" aria-label="Next">Next ›</button>
+            <div class="p-content">
+              <h3>PsiConnect Study</h3>
+              <ul>
+                <li>Australia’s first psychedelic imaging trial.</li>
+                <li>World’s largest sample (N≈65).</li>
+                <li>Status: complete; multiple outputs under prep.</li>
+              </ul>
+            </div>
+          </figure>
+
+          <figure class="p-slide">
+            <div class="p-bg">
+              <img src="psiconnect_bg_1600_dim.webp" alt="Keio">
+            </div>
+            <div class="p-content">
+              <h3>Keio University Psilocybin Trial</h3>
+              <ul>
+                <li>Japan’s first serotonergic psychedelic clinical trial.</li>
+                <li>Role: curated therapeutic music; advisory input.</li>
+              </ul>
+            </div>
+          </figure>
+          
+          <figure class="p-slide">
+            <div class="p-bg">
+              <img src="psiconnect_bg_1600_dim.webp" alt="Opioid">
+            </div>
+            <div class="p-content">
+              <h3>Psilocybin for Opioid Use</h3>
+              <ul>
+                <li>Wellcome Leap UA clinical therapy trial.</li>
+                <li>Role: trial design and analysis.</li>
+              </ul>
+            </div>
+          </figure>
+
+          <figure class="p-slide">
+            <div class="p-bg">
+              <img src="psiconnect_bg_1600_dim.webp" alt="Addiction">
+            </div>
+            <div class="p-content">
+              <h3>Addiction Neurocircuitry</h3>
+              <ul>
+                <li>Machine-learning informed fMRI–TMS study.</li>
+                <li>Translational focus on addiction targets.</li>
+              </ul>
+            </div>
+          </figure>
+
+           <figure class="p-slide">
+            <div class="p-bg">
+              <img src="psiconnect_bg_1600_dim.webp" alt="Food Reward">
+            </div>
+            <div class="p-content">
+              <h3>Food Reward and Preference</h3>
+              <ul>
+                <li>Imaging pilot study of food reward processing.</li>
+                <li>Role: design and advisory.</li>
+              </ul>
+            </div>
+          </figure>
+        </div>
+
+        <div class="p-controls">
+          <button class="p-btn" data-p-dir="prev">‹ Prev</button>
+          <div class="p-dots">
+            <button class="p-dot is-active"></button>
+            <button class="p-dot"></button>
+            <button class="p-dot"></button>
+            <button class="p-dot"></button>
+            <button class="p-dot"></button>
           </div>
+          <button class="p-btn" data-p-dir="next">Next ›</button>
+        </div>
+      </section>
 
-          <p class="projects-cta">→ Explore my <a href="projects.html">Projects and Collaborations</a></p>
-        </section>
+      <section id="highlights">
+        <h2>Research value &amp; scope</h2>
+        <p>I build meaning into trial design, identify it in data, and bridge the connections between Brain, Mind and Mental Health.</p>
+        <p>→ Explore <a href="systemstheory.html">Systems Theory</a></p>
+      </section>
 
-        <section id="highlights" aria-label="Research value and scope">
-          <h2 class="projects__title">Research value &amp; scope</h2>
-          <p>I build meaning into trial design, identify it in data, and bridge the connections between Brain, Mind and Mental Health.</p>
-          <p>In my spare time I also develop original, cross-disciplinary theories of how reality is structured and experienced as interconnected systems, from cosmology to consciousness, based on systems reasoning, neuroscience, and foundational physics.</p>
-          <p>→ Explore <a href="systemstheory.html">Systems Theory</a></p>
-        </section>
-
-        <footer class="page-legal" aria-label="Legal notice">
-          <small>© 2025 Devon Stoliker. All rights reserved.</small>
-        </footer>
-      </main>
-    </div>
+      <footer style="margin-top: 40px; font-size: 0.8rem; color: #888;">
+        <small>© 2025 Devon Stoliker. All rights reserved.</small>
+      </footer>
+    </main>
   </div>
 
   <script>
     (function(){
-      (function(){
-        const wrap = document.querySelector('.projects');
-        if(!wrap) return;
-
-        const slidesWrap = wrap.querySelector('.p-slides');
+      // 1. CAROUSEL LOGIC
+      const wrap = document.querySelector('.projects');
+      if(wrap){
         const slides = Array.from(wrap.querySelectorAll('.p-slide'));
+        const dots = Array.from(wrap.querySelectorAll('.p-dot'));
         const btnPrev = wrap.querySelector('[data-p-dir="prev"]');
         const btnNext = wrap.querySelector('[data-p-dir="next"]');
-        const dots    = Array.from(wrap.querySelectorAll('.p-dot'));
+        let idx = 0;
 
-        let idx = 0, animating = false, activePointerId = null;
+        function showSlide(n){
+          // Loop logic
+          if(n >= slides.length) idx = 0;
+          else if(n < 0) idx = slides.length - 1;
+          else idx = n;
 
-        function updateDots(){
-          dots.forEach((d, j) => {
-            const on = j === idx;
-            d.classList.toggle('is-active', on);
-            d.setAttribute('aria-selected', on ? 'true' : 'false');
+          // Update classes
+          slides.forEach((s, i) => {
+            if(i === idx) s.classList.add('is-active');
+            else s.classList.remove('is-active');
           });
-          slidesWrap.dataset.index = idx;
-        }
-        function mod(n,m){ return ((n % m)+m)%m; }
 
-        function fadeTo(nextIdx){
-          if(animating || nextIdx === idx) return;
-          animating = true;
-          const cur = slides[idx], nxt = slides[nextIdx];
-          [cur,nxt].forEach(s => {
-            s.style.transition='none';
-            s.style.display='block';
-            s.hidden=false;
-            s.style.opacity='';
-            s.style.transform='translateX(0%)';
-          });
-          cur.style.opacity='1';
-          nxt.style.opacity='0';
-          void nxt.offsetWidth;
-          cur.style.transition='opacity .84s ease';
-          nxt.style.transition='opacity .84s ease';
-          nxt.style.opacity='1';
-          cur.style.opacity='0';
-          const done = () => {
-            slides.forEach((s,i)=>{
-              if(i!==nextIdx){ s.style.display='none'; s.hidden=true; }
-              else { s.style.display='block'; s.hidden=false; }
-              s.style.opacity='';
-              s.style.transition='';
-              s.style.transform='';
-            });
-            idx = nextIdx;
-            updateDots();
-            animating=false;
-          };
-          const onEnd = (e)=>{ if(e.target===cur || e.target===nxt){ slidesWrap.removeEventListener('transitionend', onEnd); done(); } };
-          slidesWrap.addEventListener('transitionend', onEnd);
-        }
-
-        let startX=0, deltaX=0, dragging=false, width=0, vx=0, lastX=0, lastT=0;
-
-        function setupNeighbors(i){
-          slides.forEach((s,j)=>{
-            s.style.transition='none';
-            if(j===i){ s.style.display='block'; s.hidden=false; s.style.transform='translateX(0%)'; }
-            else if(j===mod(i-1,slides.length)){ s.style.display='block'; s.hidden=false; s.style.transform='translateX(-100%)'; }
-            else if(j===mod(i+1,slides.length)){ s.style.display='block'; s.hidden=false; s.style.transform='translateX(100%)'; }
-            else { s.style.display='none'; s.hidden=true; s.style.transform=''; }
-            s.style.opacity='';
+          // Update dots
+          dots.forEach((d, i) => {
+            if(i === idx) d.classList.add('is-active');
+            else d.classList.remove('is-active');
           });
         }
 
-        function onPointerDown(e){
-          if(animating) return;
-          dragging = true;
-          slidesWrap.classList.add('dragging');
-          activePointerId = e.pointerId;
-          slidesWrap.setPointerCapture?.(activePointerId);
-          width = slidesWrap.getBoundingClientRect().width;
-          startX = e.clientX;
-          deltaX=0; vx=0; lastX=startX; lastT=performance.now();
-          setupNeighbors(idx);
-          slides[idx].classList.add('p-hover-dark');
-        }
-
-        function onPointerMove(e){
-          if(!dragging) return;
-          const x = e.clientX;
-          deltaX = x - startX;
-          const now = performance.now();
-          const dt = now - lastT;
-          if(dt>0){
-            vx=(x-lastX)/dt;
-            lastX=x;
-            lastT=now;
-          }
-          const cur=slides[idx];
-          const prev=slides[mod(idx-1,slides.length)];
-          const next=slides[mod(idx+1,slides.length)];
-          const p = Math.max(-1, Math.min(1, deltaX/width));
-          cur.style.transform  = `translateX(${p*100}%)`;
-          prev.style.transform = `translateX(${(p-1)*100}%)`;
-          next.style.transform = `translateX(${(p+1)*100}%)`;
-        }
-
-        function onPointerUp(){
-          if(!dragging) return;
-          dragging=false;
-          slidesWrap.classList.remove('dragging');
-          slidesWrap.releasePointerCapture?.(activePointerId);
-          slides[idx].classList.remove('p-hover-dark');
-          const threshold=0.22, fast=Math.abs(vx)>0.6;
-          let target=idx;
-          if(deltaX >  width*threshold || (fast && deltaX>0)) target = mod(idx-1,slides.length);
-          else if(deltaX < -width*threshold || (fast && deltaX<0)) target = mod(idx+1,slides.length);
-
-          const cur=slides[idx];
-          const prev=slides[mod(idx-1,slides.length)];
-          const next=slides[mod(idx+1,slides.length)];
-          [cur,prev,next].forEach(s=> s.style.transition='transform .28s ease');
-
-          if(target===idx){
-            cur.style.transform='translateX(0%)';
-            prev.style.transform='translateX(-100%)';
-            next.style.transform='translateX(100%)';
-            const done=()=>{
-              [cur,prev,next].forEach(s=> s.style.transition='');
-              slides.forEach((s,i)=>{
-                if(i!==idx){ s.style.display='none'; s.hidden=true; s.style.transform=''; }
-                else { s.style.display='block'; s.hidden=false; }
-              });
-            };
-            cur.addEventListener('transitionend', done, {once:true});
-          }else{
-            if(target===mod(idx+1,slides.length)){
-              cur.style.transform='translateX(-100%)';
-              next.style.transform='translateX(0%)';
-            }else{
-              cur.style.transform='translateX(100%)';
-              prev.style.transform='translateX(0%)';
-            }
-            const done=()=>{
-              slides.forEach((s,i)=>{
-                if(i!==target){ s.style.display='none'; s.hidden=true; s.style.transform=''; }
-                else { s.style.display='block'; s.hidden=false; s.style.transform=''; }
-                s.style.transition='';
-              });
-              idx=target;
-              updateDots();
-            };
-            slidesWrap.addEventListener('transitionend', done, {once:true});
-          }
-        }
-
-        slidesWrap.addEventListener('pointerdown', onPointerDown);
-        window.addEventListener('pointermove', onPointerMove, {passive:true});
-        window.addEventListener('pointerup', onPointerUp);
-        window.addEventListener('pointercancel', onPointerUp);
-
-        slides.forEach(slide=>{
-          slide.addEventListener('pointerdown', ()=> slide.classList.add('p-hover-dark'));
-          window.addEventListener('pointerup', ()=> slide.classList.remove('p-hover-dark'));
-          slide.addEventListener('pointercancel', ()=> slide.classList.remove('p-hover-dark'));
-          slide.addEventListener('click', () => {
-            slide.classList.add('p-hover-dark');
-            setTimeout(()=> slide.classList.remove('p-hover-dark'), 240);
-          });
-        });
-
-        btnPrev.addEventListener('click', ()=> fadeTo(mod(idx-1,slides.length)));
-        btnNext.addEventListener('click', ()=> fadeTo(mod(idx+1,slides.length)));
-        dots.forEach((d,j)=> d.addEventListener('click', ()=> fadeTo(j)));
-
-        slides.forEach((s,i)=>{
-          if(i>0) s.hidden=true;
-          s.style.opacity='';
-          s.style.transform='';
-          s.style.display = i===0?'block':'none';
-        });
-        slidesWrap.dataset.index='0';
-        updateDots();
-      })();
-
-      function setupSparkEmitter(el, symbol){
-        if(!el) return;
-        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        let active = false;
-        function emit(){
-          if(active) return;
-          active = true;
-          const span = document.createElement('span');
-          span.className = 'sparkle';
-          span.textContent = symbol;
-          const dx = (Math.random() * 44 - 22).toFixed(0) + 'px';
-          span.style.setProperty('--dx', dx);
-          el.appendChild(span);
-          const cleanup = () => { span.remove(); active = false; };
-          if(prefersReduced){ setTimeout(cleanup, 900); }
-          else {
-            span.addEventListener('animationend', cleanup, {once:true});
-            setTimeout(cleanup, 1200);
-          }
-        }
-        el.addEventListener('mouseenter', emit);
-        el.addEventListener('touchstart', emit, {passive:true});
-        let over=false;
-        el.addEventListener('pointerenter', ()=>{ over=true; });
-        el.addEventListener('pointerleave', ()=>{ over=false; });
-        window.addEventListener('scroll', ()=>{ if(over) emit(); }, {passive:true});
+        btnNext.addEventListener('click', () => showSlide(idx + 1));
+        btnPrev.addEventListener('click', () => showSlide(idx - 1));
+        dots.forEach((d, i) => d.addEventListener('click', () => showSlide(i)));
       }
-      setupSparkEmitter(document.getElementById('fortyTwoWord'), '42');
+
+      // 2. SPARKLE LOGIC
+      const word = document.getElementById('fortyTwoWord');
+      if(word){
+        word.addEventListener('mouseenter', () => {
+          const spark = document.createElement('span');
+          spark.className = 'sparkle';
+          spark.textContent = '42';
+          spark.style.position = 'absolute';
+          spark.style.left = '50%'; 
+          spark.style.top = '-20px';
+          spark.style.color = '#007acc';
+          spark.style.fontSize = '1.5rem';
+          spark.style.fontWeight = 'bold';
+          spark.style.animation = 'floatUp 1s forwards';
+          word.appendChild(spark);
+          setTimeout(() => spark.remove(), 1000);
+        });
+      }
+
+      // Add simple float animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes floatUp {
+          0% { transform: translateY(0) scale(0.8); opacity: 1; }
+          100% { transform: translateY(-30px) scale(1.2); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
     })();
   </script>
 </body>
