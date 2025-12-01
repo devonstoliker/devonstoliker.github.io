@@ -37,9 +37,7 @@ body {
   width: 100%; min-height: 100vh;
 }
 
-/* Global Sidebar (Mobile Default) */
 #sidebar {
-  background: rgba(255, 255, 255, 0.75);
   padding: 40px 20px;
   border-right: 1px solid #eee;
   text-align: center;
@@ -76,12 +74,10 @@ body {
 .icon-link svg { width: 24px; height: 24px; fill: #555; transition: fill 0.2s; }
 .icon-link:hover svg { fill: var(--accent); }
 
-/* Global Main Content */
 #main-content {
   padding: 40px 30px;
   max-width: var(--content-max-width);
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.5); /* The "White Fog" */
   display: flex;
   flex-direction: column;
   min-height: 100vh; 
@@ -100,7 +96,6 @@ a:hover { text-decoration: underline; }
   border-bottom: 1px solid var(--border); padding-bottom: .4rem;
 }
 
-/* Base Carousel (Index Page Style) */
 .p-slides {
   position: relative; overflow: hidden; border-radius: var(--p-radius);
   box-shadow: var(--p-shadow); aspect-ratio: 16/9;
@@ -321,11 +316,12 @@ a:hover { text-decoration: underline; }
     position: fixed; top: 0; left: 0;
     width: var(--sidebar-width); height: 100vh;
     overflow-y: auto; border-right: 1px solid #ddd; border-bottom: none;
-    background: rgba(255, 255, 255, 0.1); 
+    background: rgba(255, 255, 255, 0.2); 
   }
   
   #main-content {
     margin-left: var(--sidebar-width); padding: 60px 50px; min-height: 100vh;
+    background: rgba(255, 255, 255, 0.5);
   }
 }
 
@@ -340,7 +336,7 @@ a:hover { text-decoration: underline; }
   #main-content {
     margin-left: 0; width: 100%; padding: 20px;
     overflow-x: hidden;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.75);
   }
   
   .projects-carousel .p-slides {
