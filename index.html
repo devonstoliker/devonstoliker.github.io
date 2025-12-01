@@ -7,254 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script src="background.js" defer></script>
-  <style>
-    :root{
-      --container-max: 1200px;
-      --rail-w: 260px;
-      --gap: 32px;
-      --measure: 66ch;
-      --pad: 16px;
-      --border: #eee;
-      --accent: #007acc;
-      --icon: #444;
-      --icon-hover: #007acc;
-      --rail-nudge: -6px;
-      --slide-h: auto;
-    }
-
-    html, body { height: 100%; margin: 0; }
-    body{
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: #111;
-      background: #fff;
-      -webkit-text-size-adjust: 100%;
-      overflow-x: hidden;
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-      display: flex;
-      flex-direction: column;
-      min-height: 100dvh;
-    }
-
-    .wrap{
-      width: 100%;
-      max-width: var(--container-max);
-      margin: 0 auto;
-      padding: 0 var(--pad);
-      box-sizing: border-box;
-      flex: 1 1 auto;
-      display: flex;
-    }
-
-    #container{ display: block; flex: 1 1 auto; }
-
-    #sidebar{ border-bottom: 1px solid var(--border); padding: 18px 0; }
-    .sidebar-content{
-      display: grid;
-      grid-template-columns: auto 1fr;
-      grid-template-areas:
-        "img title"
-        "img affiliation"
-        "img nav1"
-        "img nav2";
-      column-gap: 14px;
-      row-gap: 8px;
-      align-items: start;
-      transform: translateX(var(--rail-nudge));
-    }
-    .site-title{ grid-area: title; margin: 0; font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
-    .affiliation{ grid-area: affiliation; margin: 2px 0 4px; font-weight: 500; color: #333; line-height: 1.35; }
-    .profile-img{ grid-area: img; width: 88px; height: auto; border-radius: 10px; justify-self: center; display: block; }
-
-    #sidebar-nav-links{ grid-area: nav1; }
-    #sidebar-icon-links{ grid-area: nav2; }
-
-    #sidebar-nav-links a{
-      display: inline-block; margin: 6px 12px 0 0; color: var(--accent);
-      text-decoration: none; font-weight: 500; white-space: nowrap;
-    }
-    #sidebar-nav-links a:hover{ text-decoration: underline; }
-
-    #sidebar-icon-links{
-      display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; margin-top: 6px;
-    }
-    .icon-link{
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 26px; height: 26px; color: #444; text-decoration: none;
-      transition: color .18s ease, transform .18s ease, opacity .18s ease; opacity: 0.9;
-    }
-    .icon-link:hover{ color: var(--icon-hover); transform: translateY(-1px); opacity: 1; }
-    .icon-link svg{ display: block; width: 100%; height: 100%; fill: currentColor; }
-    .sr-only{ position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; border: 0; padding: 0; margin: -1px; }
-
-    #main-content{
-      max-width: var(--measure);
-      margin: 22px auto 0;
-      line-height: 1.75;
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
-    }
-    h1, h2{ font-weight: 700; }
-    h1{
-      font-size: clamp(1.6rem, 1.2rem + 1.1vw, 1.9rem);
-      margin: 0 0 1rem 0; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;
-    }
-    h2{ font-size: clamp(1.15rem, 1rem + .6vw, 1.35rem); margin: 1.2rem 0 .6rem; }
-    p{ margin: 0 0 1.05rem 0; }
-    a{ color: var(--accent); text-decoration: none; }
-    a:hover{ text-decoration: underline; }
-
-    .neuro-quote{
-      position: relative; margin: 1.6rem 0; padding: 1.1rem 1.1rem 1.1rem 1.3rem;
-      background: #fafcff; border-left: 3px solid #7aa6ff; border-radius: 10px;
-      font-weight: 300; font-size: 1.02rem; line-height: 1.8;
-    }
-    .neuro-quote blockquote{ margin: 0; }
-    .neuro-quote::before, .neuro-quote::after{
-      content: "{}"; position: absolute; top: -10px; font-weight: 700; font-size: 4.8rem;
-      line-height: 1; letter-spacing: -0.04em; opacity: 0.06; pointer-events: none; user-select: none;
-    }
-    .neuro-quote::before{ left: -10px; transform: rotate(-6deg); }
-    .neuro-quote::after { right: -8px;  transform: rotate(6deg); }
-
-    .spark-word{ position: relative; display: inline-block; cursor: default; }
-    .sparkle{
-      --dx: 0px;
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%,-50%) scale(1);
-      pointer-events: none;
-      font-size: clamp(1.3rem, 1.2rem + 0.5vw, 2rem);
-      line-height: 1;
-      opacity: 0;
-      animation: floatUp 1s ease-out forwards;
-      will-change: transform, opacity;
-      user-select: none;
-    }
-    @keyframes floatUp{
-      0%   { transform: translate(-50%, -10%) scale(0.9); opacity: 0; }
-      20%  { opacity: 1; }
-      100% { transform: translate(calc(-50% + var(--dx)), -160%) scale(1.15); opacity: 0; }
-    }
-    @media (prefers-reduced-motion: reduce){
-      .sparkle{ animation: none; opacity: 0.85; }
-    }
-
-    @media (min-width: 1024px){
-      #container{ display: grid; grid-template-columns: var(--rail-w) 1fr; column-gap: var(--gap); align-items: start; }
-      #sidebar{ position: sticky; top: 0; align-self: start; height: 100dvh; overflow: auto; border-bottom: none; border-right: 1px solid var(--border); padding: 22px 0; }
-      .sidebar-content{ display: flex; flex-direction: column; align-items: center; padding: 0 8px; text-align: center; }
-      .profile-img{ width: 120px; border-radius: 12px; display: block; margin: 10px 0 14px; }
-      .site-title{ font-size: 1.15rem; margin: 0 0 6px 0; }
-      .affiliation{ margin: 0 0 10px 0; }
-      #sidebar-nav-links{ width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 12px; margin-top: 4px; }
-      #sidebar-nav-links a{ margin: 0; }
-      #sidebar-icon-links{ justify-content: center; }
-      #main-content{ max-width: var(--measure); width: 100%; margin: 28px 0 0; }
-    }
-
-    @media (min-width: 1400px){ :root{ --container-max: 1280px; } }
-    @media (max-width: 420px){
-      .profile-img{ width: 78px; }
-      #main-content{ max-width: 60ch; }
-      .neuro-quote{ font-size: 1rem; }
-      .neuro-quote::before, .neuro-quote::after{ font-size: 4rem; top: -8px; }
-    }
-
-    .page-legal{
-      margin-top: auto;
-      padding: 16px 0 24px;
-      color: #888;
-      opacity: 0.85;
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border);
-      text-align: left;
-    }
-    .page-legal small { display: inline-block; }
-
-    :root{
-      --p-radius: 16px;
-      --p-shadow: 0 12px 28px rgba(0,0,0,.16);
-      --p-overlay-base: .18;
-      --p-overlay-hover: .48;
-      --p-band-alpha: .42;
-    }
-
-    .projects { margin: 0.0rem 0 2.0rem; }
-    .projects__title{
-      font-size: 1.15rem; font-weight: 700; margin: 0 0 .8rem 0;
-      border-bottom: 1px solid var(--border); padding-bottom: .4rem;
-    }
-
-    .p-slides{
-      position: relative; overflow: hidden; border-radius: var(--p-radius);
-      box-shadow: var(--p-shadow); aspect-ratio: 16/9;
-      min-height: 340px; max-height: 560px; background:#000;
-      user-select: none; -webkit-user-drag: none; touch-action: pan-y pinch-zoom;
-      cursor: grab;
-    }
-    .p-slides.dragging{ cursor: grabbing; }
-
-    .p-slide{
-      position: absolute; inset: 0; display: none; margin: 0;
-      isolation:isolate; will-change: transform, opacity;
-      --p-veil-alpha: var(--p-overlay-base);
-    }
-    .p-slide.is-active{ display:block; }
-
-    .p-bg{ position:absolute; inset:0; z-index:0; }
-    .p-bg picture,.p-bg img{ display:block; width:100%; height:100% }
-    .p-bg img{ object-fit: cover; }
-
-    .p-veil{
-      position:absolute; inset:0; z-index:1; pointer-events:none;
-      background-color: rgba(0,0,0,var(--p-veil-alpha));
-      transition: background-color .18s ease;
-    }
-
-    .p-slide.p-hover-dark,
-    .p-slide:hover{
-      --p-veil-alpha: var(--p-overlay-hover);
-    }
-
-    .p-band{
-      position:absolute; inset:0; z-index:2; pointer-events:none;
-      background: linear-gradient(to bottom,
-        rgba(0,0,0,0) 0%,
-        rgba(0,0,0,var(--p-band-alpha)) 38%,
-        rgba(0,0,0,var(--p-band-alpha)) 62%,
-        rgba(0,0,0,0) 100%);
-    }
-
-    .p-content{
-      position: relative; z-index:3; color:#fff; padding: 1.75rem 1.25rem;
-      text-shadow: 0 1px 2px rgba(0,0,0,.35);
-      transform: translateZ(0) scale(1);
-      transition: transform .18s ease, text-shadow .18s ease;
-    }
-    .p-slide.p-hover-dark .p-content,
-    .p-slide:hover .p-content{
-      transform: translateZ(0) scale(1.02);
-      text-shadow: 0 14px 26px rgba(0,0,0,.35), 0 4px 10px rgba(0,0,0,.26);
-    }
-    .p-content h3{ margin:0 0 .6rem; font-size: clamp(1.1rem,1.0rem + .6vw,1.4rem) }
-    .p-content ul{ margin:.35rem 0 0 0; padding-left:1.1rem }
-    .p-content li{ margin:.28rem 0 }
-
-    .p-controls{ display:flex; align-items:center; justify-content:space-between; gap:.75rem; margin-top:.6rem; }
-    .p-btn{ appearance:none; border:1px solid var(--border); background:#fff; padding:.35rem .7rem; border-radius:8px; cursor:pointer; font-weight:500; }
-    .p-btn:disabled{ opacity:.5; cursor:not-allowed; }
-    .p-dots{ display:flex; justify-content:center; gap:.4rem; flex:1 }
-    .p-dot{ width:9px; height:9px; border-radius:50%; border:1px solid #aaa; background:#ddd; cursor:pointer }
-    .p-dot.is-active{ background: var(--accent); border-color: var(--accent); }
-
-    .projects-cta{
-      margin-top: 0.9rem;
-      font-size: 0.95rem;
-    }
-
-    @media (min-width: 900px){ .p-content{ padding: 2.2rem 2rem; } }
-  </style>
 </head>
 <body>
   <canvas id="sidebar-canvas"></canvas>
@@ -264,9 +16,9 @@
       <aside id="sidebar" role="complementary" aria-label="Site">
         <div class="sidebar-overlay"></div>
         <div class="sidebar-content">
+          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img">
           <h1 class="site-title">Devon Stoliker</h1>
           <p class="affiliation">Neuroscientist | Psychedelic Researcher | Systems Theorist </p>
-          <img src="profile.jpg" alt="Devon Stoliker" class="profile-img">
 
           <nav id="sidebar-nav-links" aria-label="Primary">
             <a href="index.html">Main</a>
@@ -456,7 +208,7 @@
           <h2 class="projects__title">Research value &amp; scope</h2>
           <p>I build meaning into trial design, identify it in data, and bridge the connections between Brain, Mind and Mental Health.</p>
           <p>In my spare time I also develop original, cross-disciplinary theories of how reality is structured and experienced as interconnected systems, from cosmology to consciousness, based on systems reasoning, neuroscience, and foundational physics.</p>
-         % <p>→ Explore <a href="systemstheory.html">Systems Theory</a></p>
+          <p>→ Explore <a href="systemstheory.html">Systems Theory</a></p>
         </section>
 
         <footer class="page-legal" aria-label="Legal notice">
@@ -465,16 +217,6 @@
       </main>
     </div>
   </div>
-
-  <style>
-    #sidebar-canvas{
-      position: fixed; top: 0; left: 0; width: var(--rail-w); height: 100dvh;
-      z-index: 0; pointer-events: none;
-    }
-    @media (max-width: 1023.98px){
-      #sidebar-canvas{ position: static; width: 100%; height: 180px; }
-    }
-  </style>
 
   <script>
     (function(){
