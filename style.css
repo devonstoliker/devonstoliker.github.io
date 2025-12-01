@@ -1,13 +1,10 @@
-/* --- 1. GLOBAL VARIABLES & RESET --- */
 :root {
-  /* Layout Variables */
   --sidebar-width: 280px; 
   --content-max-width: 900px;
   --gap: 32px;
   --accent: #007acc;
   --text-color: #111;
   
-  /* Carousel Variables */
   --p-radius: 16px;
   --p-shadow: 0 12px 28px rgba(0,0,0,.16);
   --p-overlay-base: .18;
@@ -28,7 +25,6 @@ body {
   width: 100%;
 }
 
-/* --- 2. BACKGROUND CANVAS --- */
 #sidebar-canvas {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
@@ -36,15 +32,12 @@ body {
   pointer-events: none;
 }
 
-/* --- 3. LAYOUT STRUCTURE --- */
 .wrap {
   position: relative; z-index: 1;
   width: 100%; min-height: 100vh;
 }
 
-/* --- 4. SIDEBAR STYLING --- */
 #sidebar {
-  /* UPDATED: Reduced opacity to make canvas more visible */
   background: rgba(255, 255, 255, 0.75);
   padding: 40px 20px;
   border-right: 1px solid #eee;
@@ -69,12 +62,10 @@ body {
 .icon-link svg { width: 24px; height: 24px; fill: #555; transition: fill 0.2s; }
 .icon-link:hover svg { fill: var(--accent); }
 
-/* --- 5. MAIN CONTENT AREA --- */
 #main-content {
   padding: 40px 30px;
   max-width: var(--content-max-width);
   margin: 0 auto;
-  /* UPDATED: Reduced opacity to make canvas more visible */
   background: rgba(255, 255, 255, 0.5);
 }
 
@@ -84,7 +75,6 @@ p { margin-bottom: 1.5rem; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* --- 6. ADVANCED CAROUSEL --- */
 .projects { margin: 0.0rem 0 2.0rem; width: 100%; }
 
 .projects__title {
@@ -102,48 +92,35 @@ a:hover { text-decoration: underline; }
 }
 .p-slides.dragging { cursor: grabbing; }
 
-/* STATIC BACKGROUND IMAGE (DOES NOT SWIPE) */
 .p-static-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
 }
 .p-static-bg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.8; 
+    width: 100%; height: 100%; object-fit: cover; opacity: 0.8; 
 }
 
-/* THE SLIDE (CONTAINS ONLY TEXT NOW) */
 .p-slide {
   position: absolute; inset: 0; display: none; margin: 0;
   isolation: isolate; will-change: transform, opacity;
-  z-index: 2; /* Sits above the static image */
+  z-index: 2; 
 }
 .p-slide.is-active { display:block; }
 
-/* OVERLAYS */
 .p-veil {
   position:absolute; inset:0; z-index:1; pointer-events:none;
   background-color: rgba(0,0,0,var(--p-overlay-base));
   transition: background-color .18s ease;
 }
 
-.p-slide:hover .p-veil {
-  background-color: rgba(0,0,0,var(--p-overlay-hover));
-}
+.p-slide:hover .p-veil { background-color: rgba(0,0,0,var(--p-overlay-hover)); }
 
 .p-content {
   position: relative; z-index: 3; color:#fff; padding: 1.75rem 1.25rem;
   text-shadow: 0 1px 2px rgba(0,0,0,.35);
   transform: translateZ(0) scale(1);
   transition: transform .18s ease, text-shadow .18s ease;
-  /* Ensure content doesn't block the drag area too much */
   pointer-events: none; 
 }
-/* Re-enable pointer events for links inside content */
 .p-content a { pointer-events: auto; }
 
 .p-slide:hover .p-content {
@@ -151,10 +128,8 @@ a:hover { text-decoration: underline; }
   text-shadow: 0 14px 26px rgba(0,0,0,.35), 0 4px 10px rgba(0,0,0,.26);
 }
 
-/* UPDATED: FORCE TITLE WHITE */
 .p-content h3 { 
-    color: #ffffff; 
-    margin:0 0 .6rem; 
+    color: #ffffff; margin:0 0 .6rem; 
     font-size: clamp(1.1rem,1.0rem + .6vw,1.4rem);
 }
 
@@ -170,10 +145,9 @@ a:hover { text-decoration: underline; }
 
 .projects-cta { margin-top: 0.9rem; font-size: 0.95rem; }
 
-/* UPDATED: QUOTE STYLING (Soft Grey, No Border) */
 .neuro-quote {
   position: relative; margin: 1.6rem 0; padding: 1.6rem;
-  background: rgba(0, 0, 0, 0.04); /* Soft transparent grey */
+  background: rgba(0, 0, 0, 0.04);
   border-radius: 12px;
   font-weight: 300; font-size: 1.02rem; line-height: 1.8;
 }
@@ -191,8 +165,10 @@ a:hover { text-decoration: underline; }
   20%  { opacity: 1; }
   100% { transform: translate(calc(-50% + var(--dx)), -160%) scale(1.15); opacity: 0; }
 }
+@media (prefers-reduced-motion: reduce){
+  .sparkle { animation: none; opacity: 0.85; }
+}
 
-/* --- 7. MEDIA QUERIES --- */
 @media (min-width: 900px) {
   .p-content { padding: 2.2rem 2rem; }
   
@@ -214,8 +190,10 @@ a:hover { text-decoration: underline; }
     border-right: none; border-bottom: 1px solid #ddd;
     padding: 30px 15px;
   }
+
   #main-content {
     margin-left: 0; width: 100%; padding: 20px;
     overflow-x: hidden;
+    background: rgba(255, 255, 255, 0.9);
   }
 }
